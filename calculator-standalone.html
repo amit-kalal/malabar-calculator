@@ -449,6 +449,62 @@ body {
   margin-bottom: 22px;
 }
 
+.rate-showcase-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.live-rate-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 4px 14px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.live-rate-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.live-rate-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+  display: inline-block;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+.btn-sync-rate {
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--malabar-maroon);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition);
+}
+
+.btn-sync-rate:hover {
+  background: var(--gold-shimmer);
+  border-color: var(--gold-primary);
+}
+
 .rate-showcase-card {
   background: linear-gradient(135deg, #FFFFFF 0%, #FDFBF7 100%);
   border: 2px solid var(--gold-primary);
@@ -1847,66 +1903,78 @@ body {
 
     <!-- Prominent Gold Rate Showcase (22K Input + Auto 24K and 18K Rates) -->
     <section class="rate-banner-container">
-      <div class="rate-showcase-card">
-        <!-- 22K Primary Input -->
-        <div class="rate-tier primary-22k">
-          <div class="rate-tier-badge">
-            <span class="purity-badge-pill gold-22k">22K</span>
-            <span class="hallmark-sub">Standard 916</span>
+      <div class="rate-showcase-wrapper">
+        <div class="live-rate-status-bar">
+          <div class="live-rate-indicator">
+            <span class="live-rate-dot"></span>
+            <span id="rate-source-label">📍 Bangalore, Karnataka Live Rate: ₹11,420/g</span>
           </div>
-          <div class="rate-tier-content">
-            <label for="gold-rate-input" class="rate-label">
-              Today's 22k Gold Rate :
-            </label>
-            <div class="rate-input-wrapper">
-              <span class="currency-symbol">₹</span>
-              <input 
-                type="number" 
-                id="gold-rate-input" 
-                class="rate-input" 
-                value="" 
-                min="0" 
-                step="any" 
-                placeholder="0"
-                title="Enter current 22k gold rate per gram"
-              />
-              <span class="rate-unit">/ gram</span>
+          <button type="button" id="btn-refresh-rate" class="btn-sync-rate" title="Sync latest Bangalore live rate">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+            Sync Today's Rate
+          </button>
+        </div>
+        <div class="rate-showcase-card">
+          <!-- 22K Primary Input -->
+          <div class="rate-tier primary-22k">
+            <div class="rate-tier-badge">
+              <span class="purity-badge-pill gold-22k">22K</span>
+              <span class="hallmark-sub">Standard 916</span>
+            </div>
+            <div class="rate-tier-content">
+              <label for="gold-rate-input" class="rate-label">
+                Today's 22k Gold Rate :
+              </label>
+              <div class="rate-input-wrapper">
+                <span class="currency-symbol">₹</span>
+                <input 
+                  type="number" 
+                  id="gold-rate-input" 
+                  class="rate-input" 
+                  value="" 
+                  min="0" 
+                  step="any" 
+                  placeholder="0"
+                  title="Enter current 22k gold rate per gram"
+                />
+                <span class="rate-unit">/ gram</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="rate-divider"></div>
+          <div class="rate-divider"></div>
 
-        <!-- 24K Auto Display -->
-        <div class="rate-tier auto-24k" title="Auto-derived: 22k × 24 / 22">
-          <div class="rate-tier-badge">
-            <span class="purity-badge-pill gold-24k">24K</span>
-            <span class="hallmark-sub">Pure 999</span>
-          </div>
-          <div class="rate-tier-content">
-            <span class="derived-rate-label">24k Pure Rate (Auto)</span>
-            <div class="derived-rate-val-box">
-              <span class="derived-currency">₹</span>
-              <span class="derived-rate-val" id="rate-24k-display">0</span>
-              <span class="rate-unit">/ g</span>
+          <!-- 24K Auto Display -->
+          <div class="rate-tier auto-24k" title="Auto-derived: 22k × 24 / 22">
+            <div class="rate-tier-badge">
+              <span class="purity-badge-pill gold-24k">24K</span>
+              <span class="hallmark-sub">Pure 999</span>
+            </div>
+            <div class="rate-tier-content">
+              <span class="derived-rate-label">24k Pure Rate (Auto)</span>
+              <div class="derived-rate-val-box">
+                <span class="derived-currency">₹</span>
+                <span class="derived-rate-val" id="rate-24k-display">0</span>
+                <span class="rate-unit">/ g</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="rate-divider"></div>
+          <div class="rate-divider"></div>
 
-        <!-- 18K Auto Display -->
-        <div class="rate-tier auto-18k" title="Auto-derived: 22k × 18 / 22">
-          <div class="rate-tier-badge">
-            <span class="purity-badge-pill gold-18k">18K</span>
-            <span class="hallmark-sub">Hallmark 750</span>
-          </div>
-          <div class="rate-tier-content">
-            <span class="derived-rate-label">18k Gold Rate (Auto)</span>
-            <div class="derived-rate-val-box">
-              <span class="derived-currency">₹</span>
-              <span class="derived-rate-val" id="rate-18k-display">0</span>
-              <span class="rate-unit">/ g</span>
+          <!-- 18K Auto Display -->
+          <div class="rate-tier auto-18k" title="Auto-derived: 22k × 18 / 22">
+            <div class="rate-tier-badge">
+              <span class="purity-badge-pill gold-18k">18K</span>
+              <span class="hallmark-sub">Hallmark 750</span>
+            </div>
+            <div class="rate-tier-content">
+              <span class="derived-rate-label">18k Gold Rate (Auto)</span>
+              <div class="derived-rate-val-box">
+                <span class="derived-currency">₹</span>
+                <span class="derived-rate-val" id="rate-18k-display">0</span>
+                <span class="rate-unit">/ g</span>
+              </div>
             </div>
           </div>
         </div>
@@ -3597,6 +3665,42 @@ document.addEventListener('DOMContentLoaded', () => {
     if (installBtn) installBtn.classList.add('hidden');
     showToast('Malabar Calculator installed as an App!');
   });
+
+  // Live Gold Rate Fetch & Sync (Bangalore, Karnataka Benchmark)
+  async function loadLiveGoldRates(forceSync = false) {
+    try {
+      const res = await fetch('./rates.json?t=' + Date.now());
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data && data.rate22k && data.rate22k > 0) {
+        const statusLabel = document.getElementById('rate-source-label');
+        if (statusLabel) {
+          statusLabel.textContent = `📍 Bangalore Live Rate: ₹${data.rate22k.toLocaleString('en-IN')}/g (${data.date || 'Today'})`;
+        }
+
+        // Auto-populate when empty or when user clicks Sync Today's Rate
+        if (appState.goldRate === 0 || forceSync) {
+          appState.goldRate = data.rate22k;
+          const goldRateInput = document.getElementById('gold-rate-input');
+          if (goldRateInput) goldRateInput.value = data.rate22k;
+          updateCalculations();
+          if (forceSync) {
+            showToast(`Synced Bangalore 22k live rate: ₹${data.rate22k.toLocaleString('en-IN')}/g`);
+          }
+        }
+      }
+    } catch (err) {
+      console.log('Using offline or manual rate:', err);
+    }
+  }
+
+  const syncRateBtn = document.getElementById('btn-refresh-rate');
+  if (syncRateBtn) {
+    syncRateBtn.addEventListener('click', () => loadLiveGoldRates(true));
+  }
+
+  // Check live gold rates on launch
+  loadLiveGoldRates(false);
 
   // Initial build of table DOM structure
   renderTableStructure();

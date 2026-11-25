@@ -109,66 +109,78 @@
 
     <!-- Prominent Gold Rate Showcase (22K Input + Auto 24K and 18K Rates) -->
     <section class="rate-banner-container">
-      <div class="rate-showcase-card">
-        <!-- 22K Primary Input -->
-        <div class="rate-tier primary-22k">
-          <div class="rate-tier-badge">
-            <span class="purity-badge-pill gold-22k">22K</span>
-            <span class="hallmark-sub">Standard 916</span>
+      <div class="rate-showcase-wrapper">
+        <div class="live-rate-status-bar">
+          <div class="live-rate-indicator">
+            <span class="live-rate-dot"></span>
+            <span id="rate-source-label">📍 Bangalore, Karnataka Live Rate: ₹11,420/g</span>
           </div>
-          <div class="rate-tier-content">
-            <label for="gold-rate-input" class="rate-label">
-              Today's 22k Gold Rate :
-            </label>
-            <div class="rate-input-wrapper">
-              <span class="currency-symbol">₹</span>
-              <input 
-                type="number" 
-                id="gold-rate-input" 
-                class="rate-input" 
-                value="" 
-                min="0" 
-                step="any" 
-                placeholder="0"
-                title="Enter current 22k gold rate per gram"
-              />
-              <span class="rate-unit">/ gram</span>
+          <button type="button" id="btn-refresh-rate" class="btn-sync-rate" title="Sync latest Bangalore live rate">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+            Sync Today's Rate
+          </button>
+        </div>
+        <div class="rate-showcase-card">
+          <!-- 22K Primary Input -->
+          <div class="rate-tier primary-22k">
+            <div class="rate-tier-badge">
+              <span class="purity-badge-pill gold-22k">22K</span>
+              <span class="hallmark-sub">Standard 916</span>
+            </div>
+            <div class="rate-tier-content">
+              <label for="gold-rate-input" class="rate-label">
+                Today's 22k Gold Rate :
+              </label>
+              <div class="rate-input-wrapper">
+                <span class="currency-symbol">₹</span>
+                <input 
+                  type="number" 
+                  id="gold-rate-input" 
+                  class="rate-input" 
+                  value="" 
+                  min="0" 
+                  step="any" 
+                  placeholder="0"
+                  title="Enter current 22k gold rate per gram"
+                />
+                <span class="rate-unit">/ gram</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="rate-divider"></div>
+          <div class="rate-divider"></div>
 
-        <!-- 24K Auto Display -->
-        <div class="rate-tier auto-24k" title="Auto-derived: 22k × 24 / 22">
-          <div class="rate-tier-badge">
-            <span class="purity-badge-pill gold-24k">24K</span>
-            <span class="hallmark-sub">Pure 999</span>
-          </div>
-          <div class="rate-tier-content">
-            <span class="derived-rate-label">24k Pure Rate (Auto)</span>
-            <div class="derived-rate-val-box">
-              <span class="derived-currency">₹</span>
-              <span class="derived-rate-val" id="rate-24k-display">0</span>
-              <span class="rate-unit">/ g</span>
+          <!-- 24K Auto Display -->
+          <div class="rate-tier auto-24k" title="Auto-derived: 22k × 24 / 22">
+            <div class="rate-tier-badge">
+              <span class="purity-badge-pill gold-24k">24K</span>
+              <span class="hallmark-sub">Pure 999</span>
+            </div>
+            <div class="rate-tier-content">
+              <span class="derived-rate-label">24k Pure Rate (Auto)</span>
+              <div class="derived-rate-val-box">
+                <span class="derived-currency">₹</span>
+                <span class="derived-rate-val" id="rate-24k-display">0</span>
+                <span class="rate-unit">/ g</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="rate-divider"></div>
+          <div class="rate-divider"></div>
 
-        <!-- 18K Auto Display -->
-        <div class="rate-tier auto-18k" title="Auto-derived: 22k × 18 / 22">
-          <div class="rate-tier-badge">
-            <span class="purity-badge-pill gold-18k">18K</span>
-            <span class="hallmark-sub">Hallmark 750</span>
-          </div>
-          <div class="rate-tier-content">
-            <span class="derived-rate-label">18k Gold Rate (Auto)</span>
-            <div class="derived-rate-val-box">
-              <span class="derived-currency">₹</span>
-              <span class="derived-rate-val" id="rate-18k-display">0</span>
-              <span class="rate-unit">/ g</span>
+          <!-- 18K Auto Display -->
+          <div class="rate-tier auto-18k" title="Auto-derived: 22k × 18 / 22">
+            <div class="rate-tier-badge">
+              <span class="purity-badge-pill gold-18k">18K</span>
+              <span class="hallmark-sub">Hallmark 750</span>
+            </div>
+            <div class="rate-tier-content">
+              <span class="derived-rate-label">18k Gold Rate (Auto)</span>
+              <div class="derived-rate-val-box">
+                <span class="derived-currency">₹</span>
+                <span class="derived-rate-val" id="rate-18k-display">0</span>
+                <span class="rate-unit">/ g</span>
+              </div>
             </div>
           </div>
         </div>

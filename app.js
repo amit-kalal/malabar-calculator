@@ -1432,6 +1432,42 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('Malabar Calculator installed as an App!');
   });
 
+  // Live Gold Rate Fetch & Sync (Bangalore, Karnataka Benchmark)
+  async function loadLiveGoldRates(forceSync = false) {
+    try {
+      const res = await fetch('./rates.json?t=' + Date.now());
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data && data.rate22k && data.rate22k > 0) {
+        const statusLabel = document.getElementById('rate-source-label');
+        if (statusLabel) {
+          statusLabel.textContent = `📍 Bangalore Live Rate: ₹${data.rate22k.toLocaleString('en-IN')}/g (${data.date || 'Today'})`;
+        }
+
+        // Auto-populate when empty or when user clicks Sync Today's Rate
+        if (appState.goldRate === 0 || forceSync) {
+          appState.goldRate = data.rate22k;
+          const goldRateInput = document.getElementById('gold-rate-input');
+          if (goldRateInput) goldRateInput.value = data.rate22k;
+          updateCalculations();
+          if (forceSync) {
+            showToast(`Synced Bangalore 22k live rate: ₹${data.rate22k.toLocaleString('en-IN')}/g`);
+          }
+        }
+      }
+    } catch (err) {
+      console.log('Using offline or manual rate:', err);
+    }
+  }
+
+  const syncRateBtn = document.getElementById('btn-refresh-rate');
+  if (syncRateBtn) {
+    syncRateBtn.addEventListener('click', () => loadLiveGoldRates(true));
+  }
+
+  // Check live gold rates on launch
+  loadLiveGoldRates(false);
+
   // Initial build of table DOM structure
   renderTableStructure();
 });
