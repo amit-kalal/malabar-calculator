@@ -1,0 +1,3530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malabar Gold & Diamonds | Jewellery Price & Making Charge Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* ==========================================================================
+   MALABAR GOLD & DIAMONDS - JEWELLERY VALUATION & BILLING CALCULATOR
+   Theme: Luxury Royal Maroon (#6e1329), Imperial Gold (#C59B27 / #D4AF37),
+          Warm Ivory & Light Silk Backgrounds (#FBF8F5, #FFFFFF)
+   ========================================================================== */
+
+:root {
+  /* Brand Palette */
+  --malabar-maroon: #73132B;
+  --malabar-maroon-dark: #4F0B1C;
+  --malabar-maroon-light: #8E1C38;
+  --malabar-maroon-subtle: #FAF0F2;
+  
+  --gold-primary: #C59B27;
+  --gold-metallic: #D4AF37;
+  --gold-light: #F4E7BF;
+  --gold-shimmer: #FAF2DA;
+  --gold-dark: #9A7513;
+
+  /* Surfaces & Backgrounds (Light & Attractive) */
+  --bg-main: #FBF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-accent: #F7F2EB;
+  --bg-table-header: #F9F5EF;
+  --bg-hover: #F8F3EC;
+
+  /* Text & Border Colors */
+  --text-primary: #231815;
+  --text-secondary: #5C524E;
+  --text-muted: #877B75;
+  --text-maroon: #73132B;
+  --text-gold: #9A7513;
+
+  --border-subtle: #EBE4DA;
+  --border-gold: #D8BF83;
+  --border-active: #C59B27;
+
+  /* Status & Accents */
+  --success-green: #1B7A43;
+  --success-bg: #EAF7EE;
+  --danger-red: #A62424;
+  --danger-bg: #FBEBEB;
+
+  /* Elevation Shadows */
+  --shadow-sm: 0 2px 6px rgba(115, 19, 43, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 6px 16px rgba(115, 19, 43, 0.07), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 32px rgba(115, 19, 43, 0.10), 0 4px 10px rgba(0, 0, 0, 0.05);
+  --shadow-gold: 0 4px 18px rgba(197, 155, 39, 0.25);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Reset & Typography */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-main);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(115, 19, 43, 0.03) 0%, transparent 40%);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  padding-bottom: 90px; /* Space for sticky bar on mobile */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Top Announcement Bar */
+.top-bar {
+  background: linear-gradient(90deg, var(--malabar-maroon-dark) 0%, var(--malabar-maroon) 50%, var(--malabar-maroon-dark) 100%);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  border-bottom: 1.5px solid var(--gold-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.top-bar-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-crest {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold-light);
+}
+
+.crest-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--gold-metallic);
+}
+
+.tagline {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+}
+
+.live-date-pill-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.live-date-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 175, 55, 0.22);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: var(--gold-light);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+}
+
+.live-date-btn:hover {
+  background: rgba(212, 175, 55, 0.35);
+  border-color: var(--gold-primary);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #10B981;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: livePulse 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes livePulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.cal-icon {
+  color: var(--gold-metallic);
+  flex-shrink: 0;
+}
+
+.date-edit-hint {
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  color: var(--gold-light);
+  letter-spacing: 0.02em;
+  transition: var(--transition);
+}
+
+.live-date-btn:hover .date-edit-hint {
+  background: var(--gold-primary);
+  color: #FFFFFF;
+  border-color: var(--gold-light);
+}
+
+.btn-today-reset {
+  background: #10B981;
+  color: #FFFFFF;
+  border: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  z-index: 3;
+}
+
+.btn-today-reset:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.btn-today-reset.hidden {
+  display: none;
+}
+
+.hidden-date-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Main Container */
+.main-container {
+  max-width: 1320px;
+  margin: 24px auto;
+  padding: 0 20px;
+}
+
+/* Brand Hero Header */
+.brand-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 28px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--malabar-maroon), var(--gold-primary), var(--malabar-maroon));
+}
+
+.brand-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.brand-logo-frame {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--malabar-maroon) 0%, var(--malabar-maroon-dark) 100%);
+  border: 2px solid var(--gold-metallic);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(115, 19, 43, 0.25);
+  position: relative;
+}
+
+.gold-monogram {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--gold-light);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.brand-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--malabar-maroon);
+  line-height: 1.1;
+}
+
+.brand-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--gold-primary);
+  margin-top: 2px;
+}
+
+.calculator-pill {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  background: var(--bg-accent);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  border: 1px solid var(--border-subtle);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
+  outline: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--malabar-maroon) 0%, var(--malabar-maroon-dark) 100%);
+  color: #FFFFFF;
+  border: 1px solid var(--malabar-maroon);
+  box-shadow: 0 3px 10px rgba(115, 19, 43, 0.22);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--malabar-maroon-light) 0%, var(--malabar-maroon) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(115, 19, 43, 0.32);
+}
+
+.btn-outline {
+  background: #FFFFFF;
+  color: var(--malabar-maroon);
+  border: 1.5px solid var(--malabar-maroon);
+}
+
+.btn-outline:hover {
+  background: var(--malabar-maroon-subtle);
+  border-color: var(--malabar-maroon-light);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-ghost:hover {
+  background: var(--bg-accent);
+  color: var(--text-primary);
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   TODAY'S 3-TIER GOLD RATE SHOWCASE (22K, 24K, 18K)
+   ========================================================================== */
+.rate-banner-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.rate-showcase-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FDFBF7 100%);
+  border: 2px solid var(--gold-primary);
+  border-radius: var(--radius-lg);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  box-shadow: 0 4px 20px rgba(197, 155, 39, 0.15), 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.rate-tier {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rate-tier-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.purity-badge-pill {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  font-size: 0.82rem;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.06em;
+}
+
+.purity-badge-pill.gold-22k {
+  background: var(--malabar-maroon);
+  color: #FFFFFF;
+  border: 1px solid var(--gold-primary);
+}
+
+.purity-badge-pill.gold-24k {
+  background: #B45309;
+  color: #FFFFFF;
+}
+
+.purity-badge-pill.gold-18k {
+  background: #9D174D;
+  color: #FFFFFF;
+}
+
+.hallmark-sub {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rate-tier-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.rate-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.03em;
+  margin-bottom: 3px;
+}
+
+.derived-rate-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 3px;
+}
+
+.derived-rate-val-box {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  background: var(--bg-hover);
+  border: 1.5px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 4px 12px;
+}
+
+.derived-currency {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--malabar-maroon);
+}
+
+.derived-rate-val {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--malabar-maroon);
+  letter-spacing: -0.01em;
+}
+
+.rate-divider {
+  width: 1.5px;
+  height: 48px;
+  background: var(--border-gold);
+  opacity: 0.7;
+}
+
+.rate-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 2px solid var(--gold-primary);
+  border-radius: var(--radius-md);
+  padding: 4px 10px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: var(--transition);
+}
+
+.rate-input-wrapper:focus-within {
+  border-color: var(--malabar-maroon);
+  box-shadow: 0 0 0 3px rgba(115, 19, 43, 0.15);
+}
+
+.currency-symbol {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--malabar-maroon);
+  margin-right: 4px;
+}
+
+.rate-input {
+  border: none;
+  outline: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  width: 110px;
+  color: var(--malabar-maroon);
+  background: transparent;
+}
+
+.rate-unit {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+.rate-quick-presets {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 12px;
+  border-left: 1.5px solid var(--border-gold);
+}
+
+.preset-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.preset-chip {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 4px 9px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.preset-chip:hover {
+  border-color: var(--gold-primary);
+  color: var(--malabar-maroon);
+  background: var(--gold-shimmer);
+}
+
+.preset-chip.active {
+  background: var(--gold-primary);
+  color: #FFFFFF;
+  border-color: var(--gold-primary);
+}
+
+/* Formula Banner */
+.formula-banner {
+  background: #FFFDF9;
+  border: 1px dashed var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 9px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.formula-icon {
+  color: var(--gold-primary);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.formula-text {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.formula-dot {
+  color: var(--gold-primary);
+}
+
+/* ==========================================================================
+   MAIN CALCULATOR TABLE (SKETCH REPLICATION & ENHANCEMENT)
+   ========================================================================== */
+.table-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.table-header-bar {
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1.5px solid var(--border-subtle);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 100%);
+}
+
+.table-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--malabar-maroon);
+  letter-spacing: 0.05em;
+}
+
+.table-caption {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.table-responsive-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Table Style */
+.malabar-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.malabar-table thead th {
+  background-color: var(--bg-table-header);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 14px 16px;
+  text-transform: capitalize;
+  border-bottom: 2px solid var(--gold-primary);
+  border-right: 1px solid var(--border-subtle);
+  vertical-align: middle;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.malabar-table thead th:last-child {
+  border-right: none;
+}
+
+.col-sub {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 3px;
+}
+
+/* Columns widths & alignments */
+.col-item { min-width: 175px; }
+.col-weight { min-width: 120px; }
+.col-making { min-width: 125px; }
+.col-stone { min-width: 120px; }
+.col-discount { min-width: 155px; }
+.col-effective { min-width: 140px; }
+.col-gst { min-width: 100px; text-align: center; }
+.col-oldgold { min-width: 155px; }
+.col-deposit { min-width: 140px; }
+.col-final { min-width: 160px; text-align: right; }
+.col-actions { width: 90px; text-align: center; }
+
+/* Table Body Cells */
+.malabar-table tbody tr {
+  transition: var(--transition);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.malabar-table tbody tr:hover {
+  background-color: var(--bg-hover);
+}
+
+.malabar-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  vertical-align: middle;
+}
+
+.malabar-table tbody td:last-child {
+  border-right: none;
+}
+
+/* Individual Item Subtotal / Pricing Row */
+.item-subtotal-row {
+  background: linear-gradient(90deg, #FAF7F2 0%, #F5EFE6 100%) !important;
+  border-bottom: 2px solid var(--border-gold) !important;
+}
+
+.item-subtotal-row td {
+  padding: 8px 14px !important;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  border-right: 1px solid rgba(216, 191, 131, 0.4) !important;
+  border-bottom: 2px solid var(--border-gold) !important;
+  vertical-align: middle;
+}
+
+.item-subtotal-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--malabar-maroon);
+  letter-spacing: 0.03em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sub-val {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: inline-block;
+}
+
+.sub-val.gold {
+  color: var(--malabar-maroon);
+  font-weight: 800;
+}
+
+.sub-val.savings {
+  color: var(--success-green);
+  font-weight: 700;
+}
+
+.sub-val.deduct {
+  color: #B45309;
+}
+
+.sub-val.deposit {
+  color: #065F46;
+}
+
+.sub-val.final {
+  color: var(--malabar-maroon);
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-align: right;
+  display: block;
+}
+
+.item-subtotal-row td:nth-child(7) {
+  text-align: center;
+}
+
+.item-subtotal-row td:nth-child(10) {
+  text-align: right;
+}
+
+/* Table Inputs */
+.table-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Item Name & Purity Selection */
+.item-name-cell-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.purity-select {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  background: #FFFDF9;
+  border: 1.5px solid var(--border-gold);
+  color: var(--malabar-maroon);
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+}
+
+.purity-select:focus {
+  border-color: var(--malabar-maroon);
+  box-shadow: 0 0 0 2px rgba(115, 19, 43, 0.15);
+}
+
+.item-rate-subtext {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--malabar-maroon);
+  background: var(--malabar-maroon-subtle);
+  border: 1px solid rgba(115, 19, 43, 0.12);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.rate-subtext-val {
+  color: var(--gold-dark);
+  font-weight: 700;
+}
+
+/* Old Gold Cell Layout with Purity */
+.oldgold-cell-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.oldgold-purity-row {
+  display: flex;
+  width: 100%;
+}
+
+.oldgold-purity-select {
+  width: 100%;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: var(--radius-sm);
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  color: #B45309;
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+}
+
+.oldgold-purity-select:focus {
+  border-color: #D97706;
+}
+
+.table-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  outline: none;
+}
+
+.table-input:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 2.5px rgba(197, 155, 39, 0.2);
+  background: #FFFFFF;
+}
+
+.table-input.item-name {
+  font-weight: 600;
+  color: var(--malabar-maroon);
+}
+
+.table-input.number-input {
+  text-align: right;
+  padding-right: 22px;
+}
+
+.input-suffix {
+  position: absolute;
+  right: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.input-prefix {
+  position: absolute;
+  left: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.table-input.currency-input {
+  padding-left: 20px;
+  text-align: right;
+}
+
+/* Hide default browser number spin buttons for clean decimal typing */
+.table-input::-webkit-outer-spin-button,
+.table-input::-webkit-inner-spin-button,
+.rate-input::-webkit-outer-spin-button,
+.rate-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.table-input[type=number],
+.rate-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Effective Making Charge Badge */
+.effective-badge-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.effective-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--gold-shimmer) 0%, #FFFFFF 100%);
+  border: 1.5px solid var(--gold-primary);
+  color: var(--malabar-maroon);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.02em;
+}
+
+.effective-savings-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--success-green);
+  text-align: center;
+}
+
+/* GST Badge */
+.gst-badge {
+  display: inline-block;
+  background: var(--bg-accent);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  text-align: center;
+  width: 100%;
+}
+
+/* Old Gold Cell */
+.oldgold-deduction-wrap {
+  margin-top: 3px;
+  text-align: right;
+  min-height: 18px;
+}
+
+.oldgold-deduct-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #B45309;
+  background: #FEF3C7;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  border: 1px solid #FDE68A;
+}
+
+/* Amount Deposited Cell */
+.deposit-deduction-wrap {
+  margin-top: 3px;
+  text-align: right;
+  min-height: 18px;
+}
+
+.deposit-deduct-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #065F46;
+  background: #D1FAE5;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  border: 1px solid #A7F3D0;
+}
+
+/* Final Price Cell */
+.final-price-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.item-refund-pill {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #065F46;
+  background: #D1FAE5;
+  border: 1px solid #10B981;
+  padding: 1px 7px;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  margin-top: 2px;
+}
+
+.final-price-value {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--malabar-maroon);
+  letter-spacing: -0.01em;
+}
+
+.final-price-breakdown-btn {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--gold-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.final-price-breakdown-btn:hover {
+  color: var(--malabar-maroon);
+}
+
+/* Row Actions */
+.row-actions-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.row-action-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.row-action-btn:hover {
+  background: var(--malabar-maroon-subtle);
+  color: var(--malabar-maroon);
+}
+
+.row-action-btn.delete-btn:hover {
+  background: var(--danger-bg);
+  color: var(--danger-red);
+}
+
+/* ==========================================================================
+   TOTAL FOOTER ROW (Directly Matching Sketch)
+   ========================================================================== */
+.total-row {
+  background: linear-gradient(90deg, #FAF4EB 0%, #F5ECE0 100%);
+  font-weight: 700;
+  border-top: 2px solid var(--malabar-maroon);
+}
+
+.total-row td {
+  padding: 16px 14px;
+  border-top: 2px solid var(--gold-primary);
+  border-bottom: 2px solid var(--malabar-maroon);
+  border-right: 1px solid var(--border-gold);
+  vertical-align: middle;
+}
+
+.total-label-cell {
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  color: var(--malabar-maroon);
+  letter-spacing: 0.08em;
+}
+
+.total-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+}
+
+.total-value-cell {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.total-final-cell {
+  text-align: right;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--malabar-maroon);
+  background: rgba(212, 175, 55, 0.15);
+  letter-spacing: -0.01em;
+}
+
+.total-refund-pill {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #065F46;
+  background: #D1FAE5;
+  border: 1.5px solid #10B981;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  display: block;
+  margin-top: 4px;
+  text-align: right;
+  letter-spacing: -0.01em;
+}
+
+.footer-subtext {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.hero-refund-box {
+  background: rgba(16, 185, 129, 0.22);
+  border: 1.5px solid #34D399;
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  margin: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-refund-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #6EE7B7;
+  text-transform: uppercase;
+}
+
+.hero-refund-amount {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.hero-refund-sub {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* Quick Add Footer Bar */
+.table-footer-controls {
+  padding: 12px 24px;
+  background: #FFFFFF;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quick-add-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 4px;
+}
+
+.quick-add-btn {
+  background: var(--bg-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.quick-add-btn:hover {
+  background: var(--malabar-maroon-subtle);
+  color: var(--malabar-maroon);
+  border-color: var(--malabar-maroon-light);
+}
+
+/* ==========================================================================
+   SUMMARY CARDS GRID
+   ========================================================================== */
+.summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr) 1.6fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.summary-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+
+.summary-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--border-gold);
+}
+
+.summary-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.summary-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-card-icon.gold {
+  background: var(--gold-shimmer);
+  color: var(--gold-primary);
+}
+
+.summary-card-icon.maroon {
+  background: var(--malabar-maroon-subtle);
+  color: var(--malabar-maroon);
+}
+
+.summary-card-icon.diamond {
+  background: #EAF4FB;
+  color: #1A73E8;
+}
+
+.summary-card-icon.tax {
+  background: #F1EFFE;
+  color: #6200EE;
+}
+
+.summary-card-icon.oldgold {
+  background: #FEF3C7;
+  color: #B45309;
+}
+
+.summary-card-icon.deposit {
+  background: #D1FAE5;
+  color: #059669;
+}
+
+.summary-card-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.summary-card-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.summary-card-meta {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.summary-card-meta.savings {
+  color: var(--success-green);
+  font-weight: 600;
+}
+
+/* Hero Total Card */
+.hero-total-card {
+  background: linear-gradient(135deg, var(--malabar-maroon-dark) 0%, var(--malabar-maroon) 100%);
+  color: #FFFFFF;
+  border: 1.5px solid var(--gold-primary);
+  box-shadow: 0 8px 24px rgba(115, 19, 43, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-total-card::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
+}
+
+.hero-total-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gold-light);
+  margin-bottom: 6px;
+}
+
+.hero-total-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-total-note {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+}
+
+.hero-total-meta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meta-sep {
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   MODAL / DETAILED BREAKDOWN
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(35, 24, 21, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-dialog {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border-gold);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 520px;
+  overflow: hidden;
+  animation: modalEnter 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalEnter {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+  padding: 16px 20px;
+  background: linear-gradient(90deg, var(--malabar-maroon) 0%, var(--malabar-maroon-dark) 100%);
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+.modal-subtitle {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.6rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.audit-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.9rem;
+}
+
+.audit-row:last-child {
+  border-bottom: none;
+}
+
+.audit-row.highlight {
+  font-weight: 700;
+  color: var(--malabar-maroon);
+  font-size: 1.05rem;
+  border-top: 1.5px solid var(--gold-primary);
+  margin-top: 8px;
+  padding-top: 12px;
+}
+
+.audit-tag {
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  background: var(--gold-shimmer);
+  color: var(--gold-dark);
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+/* ==========================================================================
+   STICKY BOTTOM BAR (Mobile / Responsive)
+   ========================================================================== */
+.sticky-footer-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  border-top: 2px solid var(--gold-primary);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  padding: 12px 20px;
+  z-index: 100;
+}
+
+.sticky-footer-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sticky-info {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sticky-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.sticky-amount {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--malabar-maroon);
+}
+
+.sticky-savings {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--success-green);
+}
+
+.sticky-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION
+   ========================================================================== */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  background: var(--malabar-maroon-dark);
+  color: #FFFFFF;
+  border: 1px solid var(--gold-primary);
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-size: 0.88rem;
+  font-weight: 600;
+  z-index: 2000;
+  transition: var(--transition);
+}
+
+.toast.hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   PRINT STYLES (Official Malabar Quotation Slip)
+   ========================================================================== */
+.print-only {
+  display: none;
+}
+
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    padding: 0 !important;
+  }
+
+  .top-bar,
+  .brand-hero,
+  .rate-banner-container,
+  .formula-banner,
+  .table-card,
+  .summary-cards-grid,
+  .sticky-footer-bar,
+  .modal-overlay,
+  .toast {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+  }
+
+  .print-header {
+    text-align: center;
+    border-bottom: 2px solid #73132B;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+  }
+
+  .print-brand {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #73132B;
+    letter-spacing: 0.1em;
+  }
+
+  .print-sub {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    margin-top: 4px;
+  }
+
+  .print-meta-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: #333;
+  }
+
+  .print-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+  }
+
+  .print-table th,
+  .print-table td {
+    border: 1px solid #999;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    text-align: left;
+  }
+
+  .print-table th {
+    background-color: #F5EFEB;
+    font-weight: bold;
+    color: #73132B;
+  }
+
+  .print-table tfoot tr {
+    background-color: #FAF4EB;
+    font-weight: bold;
+  }
+
+  .print-footer {
+    border-top: 1px solid #CCC;
+    padding-top: 14px;
+    font-size: 0.75rem;
+    color: #666;
+    line-height: 1.6;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 1400px) {
+  .summary-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .hero-total-card {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 900px) {
+  .summary-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-total-card {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-bar-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .brand-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-actions {
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+  .rate-showcase-card {
+    flex-direction: column;
+    padding: 16px;
+    gap: 14px;
+    align-items: stretch;
+    border-radius: var(--radius-lg);
+  }
+  .rate-divider {
+    width: 100%;
+    height: 1px;
+  }
+  .rate-tier {
+    justify-content: space-between;
+  }
+  .summary-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-total-card {
+    grid-column: span 1;
+  }
+}
+
+</style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2373132B'/><circle cx='50' cy='50' r='38' fill='none' stroke='%23D4AF37' stroke-width='2'/><polygon points='50,20 58,38 78,41 63,55 67,75 50,65 33,75 37,55 22,41 42,38' fill='%23D4AF37'/></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <span class="brand-crest">
+        <svg viewBox="0 0 24 24" class="crest-icon" fill="currentColor">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+        MALABAR GOLD &amp; DIAMONDS
+      </span>
+      <span class="tagline">CELEBRATING 30+ YEARS OF TRUST • PURITY • TRANSPARENCY</span>
+      <div class="live-date-pill-container" id="date-container">
+        <button type="button" class="live-date-btn" id="live-date-trigger" title="Click to change date or set quotation date">
+          <span class="pulse-dot"></span>
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" class="cal-icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="live-date-display">Today: Mon, 23 Nov 2026</span>
+          <span class="date-edit-hint" title="Click to pick custom date">📅 Edit</span>
+        </button>
+        <button type="button" class="btn-today-reset hidden" id="btn-today-reset" title="Reset back to Today's Live Date">
+          ↺ Today
+        </button>
+        <input type="date" id="date-picker-input" class="hidden-date-input" aria-label="Select Quotation Date" />
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- Header & Brand Presentation -->
+    <section class="brand-hero">
+      <div class="brand-logo-container">
+        <div class="brand-logo-frame">
+          <div class="gold-monogram">M</div>
+        </div>
+        <div class="brand-text-block">
+          <h1 class="brand-title">MALABAR</h1>
+          <p class="brand-subtitle">GOLD &amp; DIAMONDS</p>
+          <span class="calculator-pill">PRECISION BILLING &amp; MAKING CHARGE CALCULATOR</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <button id="btn-print" class="btn btn-outline" title="Print or Save PDF Quotation">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Quotation
+        </button>
+        <button id="btn-copy-summary" class="btn btn-outline" title="Copy Quotation for WhatsApp">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Share WhatsApp Slip
+        </button>
+        <button id="btn-reset-sample" class="btn btn-ghost" title="Reset table to 1 item">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+          Reset Table
+        </button>
+      </div>
+    </section>
+
+    <!-- Prominent Gold Rate Showcase (22K Input + Auto 24K and 18K Rates) -->
+    <section class="rate-banner-container">
+      <div class="rate-showcase-card">
+        <!-- 22K Primary Input -->
+        <div class="rate-tier primary-22k">
+          <div class="rate-tier-badge">
+            <span class="purity-badge-pill gold-22k">22K</span>
+            <span class="hallmark-sub">Standard 916</span>
+          </div>
+          <div class="rate-tier-content">
+            <label for="gold-rate-input" class="rate-label">
+              Today's 22k Gold Rate :
+            </label>
+            <div class="rate-input-wrapper">
+              <span class="currency-symbol">₹</span>
+              <input 
+                type="number" 
+                id="gold-rate-input" 
+                class="rate-input" 
+                value="7450" 
+                min="100" 
+                step="any" 
+                placeholder="7450"
+                title="Enter current 22k gold rate per gram"
+              />
+              <span class="rate-unit">/ gram</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rate-divider"></div>
+
+        <!-- 24K Auto Display -->
+        <div class="rate-tier auto-24k" title="Auto-derived: 22k × 24 / 22">
+          <div class="rate-tier-badge">
+            <span class="purity-badge-pill gold-24k">24K</span>
+            <span class="hallmark-sub">Pure 999</span>
+          </div>
+          <div class="rate-tier-content">
+            <span class="derived-rate-label">24k Pure Rate (Auto)</span>
+            <div class="derived-rate-val-box">
+              <span class="derived-currency">₹</span>
+              <span class="derived-rate-val" id="rate-24k-display">8,127</span>
+              <span class="rate-unit">/ g</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rate-divider"></div>
+
+        <!-- 18K Auto Display -->
+        <div class="rate-tier auto-18k" title="Auto-derived: 22k × 18 / 22">
+          <div class="rate-tier-badge">
+            <span class="purity-badge-pill gold-18k">18K</span>
+            <span class="hallmark-sub">Hallmark 750</span>
+          </div>
+          <div class="rate-tier-content">
+            <span class="derived-rate-label">18k Gold Rate (Auto)</span>
+            <div class="derived-rate-val-box">
+              <span class="derived-currency">₹</span>
+              <span class="derived-rate-val" id="rate-18k-display">6,095</span>
+              <span class="rate-unit">/ g</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculation Formula Hint / Explanation Bar -->
+    <div class="formula-banner">
+      <div class="formula-icon">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      </div>
+      <div class="formula-text">
+        <strong>Multi-Purity Valuation:</strong> 
+        <span><strong>18K Rate</strong> = 22K &times; 18/22</span>
+        <span class="formula-dot">•</span>
+        <span><strong>24K Rate</strong> = 22K &times; 24/22</span>
+        <span class="formula-dot">•</span>
+        <span>Item purchase rates and Old Gold exchange deductions calculate automatically based on selected <strong>22K</strong> or <strong>18K</strong> purity.</span>
+      </div>
+    </div>
+
+    <!-- Main Items Calculator Table (Sketch Layout) -->
+    <section class="table-card">
+      <div class="table-header-bar">
+        <div class="table-title-group">
+          <h2 class="table-title">Gold Items Valuation &amp; Billing Sheet</h2>
+          <p class="table-caption">Edit any field below. Effective making charges, Old Gold deductions, GST, and final prices update in real-time.</p>
+        </div>
+        <div class="table-actions">
+          <button id="btn-add-item" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add New Item
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive-wrapper">
+        <table class="malabar-table" id="calculator-table">
+          <thead>
+            <tr>
+              <th class="col-item">Items &amp; Purity<br><span class="col-sub">22K / 18K / 24K</span></th>
+              <th class="col-weight">Items Weight<br><span class="col-sub">In Grams</span></th>
+              <th class="col-making">Making Charge<br><span class="col-sub">(Initial %)</span></th>
+              <th class="col-stone">Stone Charge<br><span class="col-sub">(₹)</span></th>
+              <th class="col-discount">Discount on making<br><span class="col-sub">charges (%)</span></th>
+              <th class="col-effective">Effective Making<br><span class="col-sub">Charge (%)</span></th>
+              <th class="col-gst">GST<br><span class="col-sub">3% Fixed</span></th>
+              <th class="col-oldgold">Old Gold (g)<br><span class="col-sub">22K / 18K Exchange</span></th>
+              <th class="col-deposit">Amount Deposited<br><span class="col-sub">(₹ Advance)</span></th>
+              <th class="col-final">Final Price<br><span class="col-sub">(₹ Payable)</span></th>
+              <th class="col-actions">Action</th>
+            </tr>
+          </thead>
+          <tbody id="items-tbody">
+            <!-- Dynamically populated rows -->
+          </tbody>
+          <tfoot>
+            <tr class="total-row" id="total-summary-row">
+              <td class="total-label-cell">
+                <div class="total-badge">
+                  <span id="total-row-label">Total</span>
+                </div>
+              </td>
+              <td class="total-value-cell" id="total-weight-display">₹0</td>
+              <td class="total-value-cell" id="total-making-display">₹0</td>
+              <td class="total-value-cell" id="total-stone-display">₹0</td>
+              <td class="total-value-cell" id="total-discount-savings-display">Saved ₹0</td>
+              <td class="total-value-cell" id="avg-effective-making-display">₹0</td>
+              <td class="total-value-cell" id="total-gst-display">₹0</td>
+              <td class="total-value-cell" id="total-oldgold-display">₹0</td>
+              <td class="total-value-cell" id="total-deposit-display">₹0</td>
+              <td class="total-final-cell" id="grand-total-cell">
+                <div id="grand-total-display">₹0</div>
+                <div id="grand-refund-display"></div>
+              </td>
+              <td class="total-actions-cell"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- Quick Row Add Suggestions -->
+      <div class="table-footer-controls">
+        <span class="quick-add-title">Quick Add Preset:</span>
+        <button class="quick-add-btn" data-name="22k Gold Necklace" data-purity="22k" data-weight="35.5" data-making="18" data-discount="20" data-stone="1500">+ 22k Necklace</button>
+        <button class="quick-add-btn" data-name="18k Diamond Ring" data-purity="18k" data-weight="4.5" data-making="22" data-discount="25" data-stone="12000">+ 18k Ring</button>
+        <button class="quick-add-btn" data-name="22k Bangle Pair" data-purity="22k" data-weight="24.0" data-making="15" data-discount="25" data-stone="0">+ 22k Bangles</button>
+        <button class="quick-add-btn" data-name="18k Rose Gold Chain" data-purity="18k" data-weight="14.0" data-making="16" data-discount="15" data-stone="0">+ 18k Chain</button>
+        <button class="quick-add-btn" data-name="24k Gold Coin" data-purity="24k" data-weight="8.0" data-making="3" data-discount="0" data-stone="0">+ 24k 8g Coin</button>
+      </div>
+    </section>
+
+    <!-- Comprehensive Billing Breakdown Cards -->
+    <section class="summary-cards-grid">
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon gold">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+          </span>
+          <span class="summary-card-title">Pure Gold Value</span>
+        </div>
+        <div class="summary-card-value" id="card-gold-value">₹0</div>
+        <div class="summary-card-meta" id="card-gold-weight">0.000 grams total</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon maroon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </span>
+          <span class="summary-card-title">Net Making Charges</span>
+        </div>
+        <div class="summary-card-value" id="card-making-charges">₹0</div>
+        <div class="summary-card-meta savings" id="card-making-savings">You save ₹0 in discounts</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon diamond">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 9 12 22 22 9 12 2"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+          </span>
+          <span class="summary-card-title">Stone &amp; Gems Charges</span>
+        </div>
+        <div class="summary-card-value" id="card-stone-charges">₹0</div>
+        <div class="summary-card-meta">Across all items</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon tax">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </span>
+          <span class="summary-card-title">GST (3% Fixed)</span>
+        </div>
+        <div class="summary-card-value" id="card-gst-charges">₹0</div>
+        <div class="summary-card-meta">SGST (1.5%) + CGST (1.5%)</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon oldgold">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
+          <span class="summary-card-title">Old Gold Deducted</span>
+        </div>
+        <div class="summary-card-value" id="card-oldgold-value">₹0</div>
+        <div class="summary-card-meta" id="card-oldgold-weight">0.000 g exchanged</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon deposit">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><path d="M7 15h2m4 0h4"/></svg>
+          </span>
+          <span class="summary-card-title">Amount Deposited</span>
+        </div>
+        <div class="summary-card-value" id="card-deposit-value">₹0</div>
+        <div class="summary-card-meta" id="card-deposit-meta">No advance paid</div>
+      </div>
+
+      <!-- Hero Total Card -->
+      <div class="summary-card hero-total-card" id="hero-total-card">
+        <div class="hero-total-badge" id="hero-total-badge">NET PAYABLE AMOUNT</div>
+        <div class="hero-total-value" id="card-grand-total">₹0</div>
+        <div id="hero-refund-banner" class="hero-refund-banner-wrap"></div>
+        <div class="hero-total-note" id="hero-total-note">After Making, Discounts, GST, Old Gold &amp; Advance Deposits</div>
+        <div class="hero-total-meta">
+          <span id="hero-items-count">0 Items</span>
+          <span class="meta-sep">•</span>
+          <span id="hero-total-savings">Total Deductions: ₹0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Item Breakdown Drawer Modal / Detail View -->
+    <div id="breakdown-modal" class="modal-overlay hidden">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <h3 class="modal-title" id="modal-item-title">Item Detailed Price Breakdown</h3>
+            <span class="modal-subtitle" id="modal-item-subtitle">Detailed audit and calculations</span>
+          </div>
+          <button class="modal-close" id="modal-close-btn">&times;</button>
+        </div>
+        <div class="modal-body" id="modal-item-content">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Print Only Quotation View -->
+    <div id="print-quotation" class="print-only">
+      <div class="print-header">
+        <div class="print-brand">MALABAR GOLD &amp; DIAMONDS</div>
+        <div class="print-sub">Official Gold Price Estimate &amp; Quotation Slip</div>
+        <div class="print-meta-grid">
+          <div><strong>Date:</strong> <span id="print-date"></span></div>
+          <div><strong>Gold Rates:</strong> 22k: <span id="print-rate"></span>/g • 18k: <span id="print-rate-18k"></span>/g • 24k: <span id="print-rate-24k"></span>/g</div>
+          <div><strong>Quotation ID:</strong> <span id="print-id"></span></div>
+        </div>
+      </div>
+      <table class="print-table" id="print-table">
+        <thead>
+          <tr>
+            <th>Item &amp; Purity</th>
+            <th>Weight (g)</th>
+            <th>Gold Value (₹)</th>
+            <th>Making %</th>
+            <th>Discount</th>
+            <th>Eff. Making (₹)</th>
+            <th>Stone (₹)</th>
+            <th>GST 3% (₹)</th>
+            <th>Old Gold Deducted</th>
+            <th>Amount Deposited</th>
+            <th>Final Price (₹)</th>
+          </tr>
+        </thead>
+        <tbody id="print-tbody">
+          <!-- Print rows -->
+        </tbody>
+        <tfoot id="print-tfoot">
+          <!-- Print totals -->
+        </tfoot>
+      </table>
+      <div class="print-footer">
+        <p>• Prices are calculated according to live 22k gold rates and prevailing making charge discounts.</p>
+        <p>• Standard 3% GST applies as per Government of India jewellery taxation norms.</p>
+        <p>• Thank you for choosing Malabar Gold &amp; Diamonds — Promise of Quality &amp; Purity.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Sticky Mobile / Bottom Summary Bar for quick glance -->
+  <div class="sticky-footer-bar">
+    <div class="sticky-footer-inner">
+      <div class="sticky-info">
+        <span class="sticky-label">Total Payable (<span id="sticky-count">1</span> item):</span>
+        <span class="sticky-amount" id="sticky-total">₹0</span>
+        <span class="sticky-savings" id="sticky-savings">(Saved ₹0 on making charges)</span>
+      </div>
+      <div class="sticky-buttons">
+        <button class="btn btn-sm btn-outline" id="btn-sticky-whatsapp">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+          Share
+        </button>
+        <button class="btn btn-sm btn-primary" id="btn-sticky-print">
+          Print
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script>
+/**
+ * Malabar Gold & Diamonds - Jewellery Price & Making Charge Calculator
+ * Multi-Purity Architecture: 22K, 18K, and 24K Gold Rates & Old Gold Exchange
+ */
+
+// Default initial items: Launch and Reset with exactly 1 row (Item 1, selectable 22k / 18k)
+function getDefaultInitialItems() {
+  return [
+    {
+      id: 'item-1',
+      name: 'Item 1',
+      purity: '22k',
+      weight: '',
+      makingCharge: '',
+      stoneCharge: '0',
+      discount: '',
+      oldGold: '',
+      oldGoldPurity: '22k',
+      deposit: '',
+      gst: 3
+    }
+  ];
+}
+
+// App State
+let appState = {
+  goldRate: 7450, // Today's 22k gold rate in INR per gram
+  goldRate24k: Math.round(7450 * (24 / 22)), // Auto-derived 24k rate (~8127)
+  goldRate18k: Math.round(7450 * (18 / 22)), // Auto-derived 18k rate (~6095)
+  items: getDefaultInitialItems()
+};
+
+// Currency & Number Formatters (Indian Rupee System)
+const inrFormatter = new Intl.NumberFormat('en-IN', {
+  style: 'currency',
+  currency: 'INR',
+  maximumFractionDigits: 2,
+  minimumFractionDigits: 0
+});
+
+const inrWholeFormatter = new Intl.NumberFormat('en-IN', {
+  style: 'currency',
+  currency: 'INR',
+  maximumFractionDigits: 0,
+  minimumFractionDigits: 0
+});
+
+/**
+ * Clean round helper to prevent floating point inaccuracies
+ */
+function round2(val) {
+  return Math.round((Number(val) || 0) * 100) / 100;
+}
+
+/**
+ * Format percentage nicely (e.g. 14.25%, 4%, 21.9%)
+ */
+function formatPercent(val) {
+  const num = Number(val) || 0;
+  return Number.isInteger(num) ? `${num}%` : `${num.toFixed(2).replace(/\.?0+$/, '')}%`;
+}
+
+/**
+ * Get gold rate per gram for a specific purity
+ */
+function getRateForPurity(purity) {
+  const p = (purity || '22k').toLowerCase();
+  if (p === '18k') return appState.goldRate18k;
+  if (p === '24k') return appState.goldRate24k;
+  return appState.goldRate; // 22k default
+}
+
+/**
+ * Calculate all price components for an item based on its purity & old gold purity
+ */
+function calculateItem(item) {
+  const weight = Math.max(0, parseFloat(item.weight) || 0);
+  const initialMakingPercent = Math.max(0, parseFloat(item.makingCharge) || 0);
+  const discountPercent = Math.max(0, parseFloat(item.discount) || 0);
+  const stoneCharge = Math.max(0, parseFloat(item.stoneCharge) || 0);
+  const gstPercent = Math.max(0, parseFloat(item.gst !== undefined ? item.gst : 3) || 0);
+  const oldGoldWeight = Math.max(0, parseFloat(item.oldGold) || 0);
+
+  // 1. Determine rate for this item based on its purity (22k vs 18k vs 24k)
+  const itemPurity = (item.purity || '22k').toLowerCase();
+  const itemRate = getRateForPurity(itemPurity);
+
+  // 2. Base Gold Value of new jewellery = Weight (g) * Item Rate (₹/g)
+  const baseGoldValue = weight * itemRate;
+
+  // 3. Effective Making Charge %:
+  // Ex: 17% initial, 25% discount => 17 * (1 - 0.25) = 12.75%
+  let effectiveMakingPercent = initialMakingPercent;
+  if (discountPercent > 0) {
+    effectiveMakingPercent = initialMakingPercent * (1 - (discountPercent / 100));
+  }
+  effectiveMakingPercent = round2(effectiveMakingPercent);
+
+  // 4. Making Charges in ₹ (calculated on total weight of new gold purchased)
+  const effectiveMakingRupees = round2(baseGoldValue * (effectiveMakingPercent / 100));
+  const grossMakingRupees = round2(baseGoldValue * (initialMakingPercent / 100));
+  const discountSavingsRupees = Math.max(0, grossMakingRupees - effectiveMakingRupees);
+
+  // 5. Pre-Tax Subtotal = Base Gold + Effective Making Charges + Stone Charges
+  const preTaxSubtotal = round2(baseGoldValue + effectiveMakingRupees + stoneCharge);
+
+  // 6. GST (3% Fixed on Subtotal)
+  const gstRupees = round2(preTaxSubtotal * (gstPercent / 100));
+
+  // 7. Gross New Jewellery Amount (inclusive of 3% GST)
+  const grossItemTotal = round2(preTaxSubtotal + gstRupees);
+
+  // 8. Determine rate for Old Gold based on its selected purity (22k vs 18k)
+  const oldGoldPurity = (item.oldGoldPurity || '22k').toLowerCase();
+  const oldGoldRate = getRateForPurity(oldGoldPurity);
+
+  // 9. Old Gold Exchange Credit = Old Gold Weight (g) * Old Gold Rate (₹/g)
+  const oldGoldValue = round2(oldGoldWeight * oldGoldRate);
+
+  // 10. Amount Deposited / Advance Paid (in ₹)
+  const depositAmount = Math.max(0, parseFloat(item.deposit) || 0);
+
+  // 11. Final Net Payable Price & Excess Refund Amount
+  const netDiff = round2(grossItemTotal - oldGoldValue - depositAmount);
+  let finalPrice = 0;
+  let refundAmount = 0;
+  if (netDiff >= 0) {
+    finalPrice = netDiff;
+    refundAmount = 0;
+  } else {
+    finalPrice = 0;
+    refundAmount = round2(Math.abs(netDiff));
+  }
+
+  return {
+    itemPurity,
+    itemRate,
+    weight,
+    baseGoldValue,
+    initialMakingPercent,
+    discountPercent,
+    effectiveMakingPercent,
+    grossMakingRupees,
+    effectiveMakingRupees,
+    discountSavingsRupees,
+    stoneCharge,
+    preTaxSubtotal,
+    gstPercent,
+    gstRupees,
+    grossItemTotal,
+    oldGoldPurity,
+    oldGoldRate,
+    oldGoldWeight,
+    oldGoldValue,
+    depositAmount,
+    finalPrice,
+    refundAmount
+  };
+}
+
+/**
+ * Build and render table DOM structure
+ * ONLY called when items are added, removed, duplicated, or reset.
+ * Does NOT get called on keystrokes, ensuring input focus is never lost.
+ */
+function renderTableStructure() {
+  const tbody = document.getElementById('items-tbody');
+  tbody.innerHTML = '';
+
+  appState.items.forEach((item, index) => {
+    const tr = document.createElement('tr');
+    tr.dataset.itemId = item.id;
+    tr.id = `row-${item.id}`;
+
+    const currentPurity = (item.purity || '22k').toLowerCase();
+    const currentOldGoldPurity = (item.oldGoldPurity || '22k').toLowerCase();
+
+    tr.innerHTML = `
+      <!-- Column 1: Items & Purity -->
+      <td>
+        <div class="item-name-cell-wrap">
+          <input 
+            type="text" 
+            class="table-input item-name" 
+            value="${escapeHtml(item.name || `Item ${index + 1}`)}" 
+            data-field="name"
+            placeholder="Item ${index + 1}"
+            title="Edit item name"
+          />
+          <select class="purity-select" id="purity-select-${item.id}" data-field="purity" title="Item Gold Purity">
+            <option value="22k" ${currentPurity === '22k' ? 'selected' : ''}>22K (${inrWholeFormatter.format(appState.goldRate)}/g)</option>
+            <option value="18k" ${currentPurity === '18k' ? 'selected' : ''}>18K (${inrWholeFormatter.format(appState.goldRate18k)}/g)</option>
+            <option value="24k" ${currentPurity === '24k' ? 'selected' : ''}>24K (${inrWholeFormatter.format(appState.goldRate24k)}/g)</option>
+          </select>
+          <div class="item-rate-subtext" id="rate-subtext-${item.id}">
+            Rate: ${inrWholeFormatter.format(getRateForPurity(currentPurity))}/g
+          </div>
+        </div>
+      </td>
+
+      <!-- Column 2: Items Weight In Grams -->
+      <td>
+        <div class="table-input-wrap">
+          <input 
+            type="number" 
+            class="table-input number-input" 
+            value="${item.weight !== undefined && item.weight !== null ? item.weight : ''}" 
+            data-field="weight" 
+            min="0" 
+            step="any" 
+            placeholder="0.00"
+            title="Enter item weight in grams"
+          />
+          <span class="input-suffix">g</span>
+        </div>
+      </td>
+
+      <!-- Column 3: Making Charge (%) -->
+      <td>
+        <div class="table-input-wrap">
+          <input 
+            type="number" 
+            class="table-input number-input" 
+            value="${item.makingCharge !== undefined && item.makingCharge !== null ? item.makingCharge : ''}" 
+            data-field="makingCharge" 
+            min="0" 
+            max="100" 
+            step="any" 
+            placeholder="0"
+            title="Initial Making Charge Percentage"
+          />
+          <span class="input-suffix">%</span>
+        </div>
+      </td>
+
+      <!-- Column 4: Stone Charge (₹) -->
+      <td>
+        <div class="table-input-wrap">
+          <span class="input-prefix">₹</span>
+          <input 
+            type="number" 
+            class="table-input currency-input" 
+            value="${item.stoneCharge !== undefined && item.stoneCharge !== null ? item.stoneCharge : 0}" 
+            data-field="stoneCharge" 
+            min="0" 
+            step="any" 
+            placeholder="0"
+            title="Stone & gem charges in INR"
+          />
+        </div>
+      </td>
+
+      <!-- Column 5: Making Charge Discount (%) -->
+      <td>
+        <div class="table-input-wrap">
+          <input 
+            type="number" 
+            class="table-input number-input" 
+            value="${item.discount !== undefined && item.discount !== null ? item.discount : ''}" 
+            data-field="discount" 
+            min="0" 
+            max="100" 
+            step="any" 
+            placeholder="0"
+            title="Discount percentage applied on making charges"
+          />
+          <span class="input-suffix">%</span>
+        </div>
+      </td>
+
+      <!-- Column 6: Effective Making Charge (Calculated %) -->
+      <td>
+        <div class="effective-badge-wrap">
+          <span class="effective-badge cell-effective-badge" id="badge-${item.id}">
+            0%
+          </span>
+          <span class="effective-savings-pill cell-savings-pill" id="savings-${item.id}">
+            No Discount
+          </span>
+        </div>
+      </td>
+
+      <!-- Column 7: GST 3% Fixed -->
+      <td>
+        <div class="table-input-wrap">
+          <span class="gst-badge" title="Fixed 3% GST (1.5% CGST + 1.5% SGST)">
+            3% Fixed
+          </span>
+        </div>
+      </td>
+
+      <!-- Column 8: Old Gold (In Grams) with 22k / 18k Purity Selection -->
+      <td>
+        <div class="oldgold-cell-wrap">
+          <div class="table-input-wrap">
+            <input 
+              type="number" 
+              class="table-input number-input" 
+              value="${item.oldGold !== undefined && item.oldGold !== null ? item.oldGold : ''}" 
+              data-field="oldGold" 
+              min="0" 
+              step="any" 
+              placeholder="0.00"
+              title="Old gold given by customer (in grams)"
+            />
+            <span class="input-suffix">g</span>
+          </div>
+          <div class="oldgold-purity-row">
+            <select class="oldgold-purity-select" id="oldgold-purity-select-${item.id}" data-field="oldGoldPurity" title="Select 22K or 18K Old Gold">
+              <option value="22k" ${currentOldGoldPurity === '22k' ? 'selected' : ''}>22K Old Gold (${inrWholeFormatter.format(appState.goldRate)}/g)</option>
+              <option value="18k" ${currentOldGoldPurity === '18k' ? 'selected' : ''}>18K Old Gold (${inrWholeFormatter.format(appState.goldRate18k)}/g)</option>
+            </select>
+          </div>
+          <div class="oldgold-deduction-wrap" id="oldgold-deduct-${item.id}">
+          </div>
+        </div>
+      </td>
+
+      <!-- Column 9: Amount Deposited (₹ Advance) -->
+      <td>
+        <div class="table-input-wrap">
+          <span class="input-prefix">₹</span>
+          <input 
+            type="number" 
+            class="table-input currency-input" 
+            value="${item.deposit !== undefined && item.deposit !== null ? item.deposit : ''}" 
+            data-field="deposit" 
+            min="0" 
+            step="any" 
+            placeholder="0"
+            title="Advance amount already deposited for this item"
+          />
+        </div>
+        <div class="deposit-deduction-wrap" id="deposit-deduct-${item.id}">
+        </div>
+      </td>
+
+      <!-- Column 10: Final Price (₹ Payable) -->
+      <td>
+        <div class="final-price-wrap">
+          <span class="final-price-value cell-final-price" id="final-${item.id}">₹0</span>
+          <div id="refund-${item.id}"></div>
+          <button type="button" class="final-price-breakdown-btn" data-breakdown-id="${item.id}" title="Click to view step-by-step breakdown">
+            View breakdown
+          </button>
+        </div>
+      </td>
+
+      <!-- Actions Column -->
+      <td>
+        <div class="row-actions-wrap">
+          <button type="button" class="row-action-btn duplicate-btn" data-action="duplicate" data-id="${item.id}" title="Duplicate this row">
+            <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <button type="button" class="row-action-btn delete-btn" data-action="delete" data-id="${item.id}" title="Remove this item">
+            <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+          </button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+
+    // Individual Item Subtotal / Pricing Row (Directly below this item)
+    const trSub = document.createElement('tr');
+    trSub.className = 'item-subtotal-row';
+    trSub.id = `subrow-${item.id}`;
+    trSub.dataset.itemId = item.id;
+    trSub.innerHTML = `
+      <!-- Column 1: Subtotal Item Label -->
+      <td>
+        <div class="item-subtotal-label" id="sub-label-${item.id}">
+          ↳ ${escapeHtml(item.name || `Item ${index + 1}`)} Total
+        </div>
+      </td>
+
+      <!-- Column 2: Pure Gold Value -->
+      <td>
+        <span class="sub-val gold" id="sub-gold-${item.id}">₹0</span>
+      </td>
+
+      <!-- Column 3: Initial Making Charge Amount -->
+      <td>
+        <span class="sub-val" id="sub-making-${item.id}">₹0</span>
+      </td>
+
+      <!-- Column 4: Stone Charge Amount -->
+      <td>
+        <span class="sub-val" id="sub-stone-${item.id}">₹0</span>
+      </td>
+
+      <!-- Column 5: Discount Saved Amount -->
+      <td>
+        <span class="sub-val savings" id="sub-discount-${item.id}">Saved ₹0</span>
+      </td>
+
+      <!-- Column 6: Effective Making Charge Amount -->
+      <td>
+        <span class="sub-val" id="sub-effmaking-${item.id}">₹0</span>
+      </td>
+
+      <!-- Column 7: GST 3% Amount -->
+      <td>
+        <span class="sub-val" id="sub-gst-${item.id}">₹0</span>
+      </td>
+
+      <!-- Column 8: Old Gold Deducted Amount -->
+      <td>
+        <span class="sub-val deduct" id="sub-oldgold-${item.id}">₹0</span>
+      </td>
+
+      <!-- Column 9: Amount Deposited (Advance) -->
+      <td>
+        <span class="sub-val deposit" id="sub-deposit-${item.id}">₹0</span>
+      </td>
+
+      <!-- Column 10: Final Price / Refund -->
+      <td>
+        <span class="sub-val final" id="sub-final-${item.id}">₹0</span>
+      </td>
+
+      <!-- Column 11: Actions Empty -->
+      <td></td>
+    `;
+    tbody.appendChild(trSub);
+  });
+
+  // Perform initial calculation update
+  updateCalculations();
+}
+
+/**
+ * Fast Reactive Update for Calculations
+ * Runs on every keystroke without touching or re-rendering input elements!
+ */
+function updateCalculations() {
+  // 1. Recalculate 24k and 18k rates from current 22k gold rate
+  appState.goldRate24k = Math.round(appState.goldRate * (24 / 22));
+  appState.goldRate18k = Math.round(appState.goldRate * (18 / 22));
+
+  // Update top banner auto-display cards
+  const el24k = document.getElementById('rate-24k-display');
+  const el18k = document.getElementById('rate-18k-display');
+  if (el24k) el24k.textContent = appState.goldRate24k.toLocaleString('en-IN');
+  if (el18k) el18k.textContent = appState.goldRate18k.toLocaleString('en-IN');
+
+  let totalWeight = 0;
+  let totalBaseGold = 0;
+  let totalEffectiveMaking = 0;
+  let totalGrossMaking = 0;
+  let totalDiscountSavings = 0;
+  let totalStone = 0;
+  let totalGst = 0;
+  let totalOldGoldWeight = 0;
+  let totalOldGoldValue = 0;
+  let totalDeposit = 0;
+  let grandTotal = 0;
+
+  appState.items.forEach((item, index) => {
+    const calc = calculateItem(item);
+
+    totalWeight += calc.weight;
+    totalBaseGold += calc.baseGoldValue;
+    totalEffectiveMaking += calc.effectiveMakingRupees;
+    totalGrossMaking += calc.grossMakingRupees;
+    totalDiscountSavings += calc.discountSavingsRupees;
+    totalStone += calc.stoneCharge;
+    totalGst += calc.gstRupees;
+    totalOldGoldWeight += calc.oldGoldWeight;
+    totalOldGoldValue += calc.oldGoldValue;
+    totalDeposit += calc.depositAmount;
+    grandTotal += calc.finalPrice;
+
+    // Update row calculated cells without re-rendering inputs
+    const badgeEl = document.getElementById(`badge-${item.id}`);
+    const savingsEl = document.getElementById(`savings-${item.id}`);
+    const oldGoldDeductEl = document.getElementById(`oldgold-deduct-${item.id}`);
+    const depositDeductEl = document.getElementById(`deposit-deduct-${item.id}`);
+    const finalEl = document.getElementById(`final-${item.id}`);
+    const refundEl = document.getElementById(`refund-${item.id}`);
+    const rateSubtextEl = document.getElementById(`rate-subtext-${item.id}`);
+
+    // Update purity dropdown option labels with current live gold rates
+    const puritySelect = document.getElementById(`purity-select-${item.id}`);
+    if (puritySelect) {
+      const opt22 = puritySelect.querySelector('option[value="22k"]');
+      const opt18 = puritySelect.querySelector('option[value="18k"]');
+      const opt24 = puritySelect.querySelector('option[value="24k"]');
+      if (opt22) opt22.textContent = `22K (${inrWholeFormatter.format(appState.goldRate)}/g)`;
+      if (opt18) opt18.textContent = `18K (${inrWholeFormatter.format(appState.goldRate18k)}/g)`;
+      if (opt24) opt24.textContent = `24K (${inrWholeFormatter.format(appState.goldRate24k)}/g)`;
+    }
+
+    // Update old gold dropdown option labels with current live gold rates
+    const oldGoldSelect = document.getElementById(`oldgold-purity-select-${item.id}`);
+    if (oldGoldSelect) {
+      const ogOpt22 = oldGoldSelect.querySelector('option[value="22k"]');
+      const ogOpt18 = oldGoldSelect.querySelector('option[value="18k"]');
+      if (ogOpt22) ogOpt22.textContent = `22K Old Gold (${inrWholeFormatter.format(appState.goldRate)}/g)`;
+      if (ogOpt18) ogOpt18.textContent = `18K Old Gold (${inrWholeFormatter.format(appState.goldRate18k)}/g)`;
+    }
+
+    // Update rate subtext / gold valuation badge directly under item name
+    if (rateSubtextEl) {
+      if (calc.weight > 0) {
+        rateSubtextEl.innerHTML = `Rate: ${inrWholeFormatter.format(calc.itemRate)}/g <span class="rate-subtext-val">• Gold: ${inrWholeFormatter.format(calc.baseGoldValue)}</span>`;
+      } else {
+        rateSubtextEl.textContent = `Rate: ${inrWholeFormatter.format(calc.itemRate)}/g`;
+      }
+    }
+
+    if (badgeEl) {
+      badgeEl.textContent = formatPercent(calc.effectiveMakingPercent);
+      badgeEl.title = `Initial ${calc.initialMakingPercent}% minus ${calc.discountPercent}% discount`;
+    }
+
+    if (savingsEl) {
+      if (calc.discountPercent > 0) {
+        savingsEl.textContent = `Save ${calc.discountPercent}% (₹${Math.round(calc.discountSavingsRupees).toLocaleString('en-IN')})`;
+        savingsEl.style.color = 'var(--success-green)';
+      } else {
+        savingsEl.textContent = 'No Discount';
+        savingsEl.style.color = 'var(--text-muted)';
+      }
+    }
+
+    if (oldGoldDeductEl) {
+      if (calc.oldGoldWeight > 0) {
+        oldGoldDeductEl.innerHTML = `<span class="oldgold-deduct-pill" title="${calc.oldGoldWeight}g × ₹${calc.oldGoldRate.toLocaleString('en-IN')}/g (${calc.oldGoldPurity.toUpperCase()})">-₹${Math.round(calc.oldGoldValue).toLocaleString('en-IN')} (${calc.oldGoldPurity.toUpperCase()})</span>`;
+      } else {
+        oldGoldDeductEl.innerHTML = '';
+      }
+    }
+
+    if (depositDeductEl) {
+      if (calc.depositAmount > 0) {
+        depositDeductEl.innerHTML = `<span class="deposit-deduct-pill" title="Advance deposited">-₹${Math.round(calc.depositAmount).toLocaleString('en-IN')} Adv.</span>`;
+      } else {
+        depositDeductEl.innerHTML = '';
+      }
+    }
+
+    if (finalEl) {
+      finalEl.textContent = inrWholeFormatter.format(calc.finalPrice);
+    }
+
+    if (refundEl) {
+      if (calc.refundAmount > 0) {
+        refundEl.innerHTML = `<span class="item-refund-pill" title="Excess advance deposited">Refund: ${inrWholeFormatter.format(calc.refundAmount)}</span>`;
+      } else {
+        refundEl.innerHTML = '';
+      }
+    }
+
+    // Update individual subtotal row elements for this item
+    const subLabelEl = document.getElementById(`sub-label-${item.id}`);
+    const subGoldEl = document.getElementById(`sub-gold-${item.id}`);
+    const subMakingEl = document.getElementById(`sub-making-${item.id}`);
+    const subStoneEl = document.getElementById(`sub-stone-${item.id}`);
+    const subDiscountEl = document.getElementById(`sub-discount-${item.id}`);
+    const subEffMakingEl = document.getElementById(`sub-effmaking-${item.id}`);
+    const subGstEl = document.getElementById(`sub-gst-${item.id}`);
+    const subOldGoldEl = document.getElementById(`sub-oldgold-${item.id}`);
+    const subDepositEl = document.getElementById(`sub-deposit-${item.id}`);
+    const subFinalEl = document.getElementById(`sub-final-${item.id}`);
+
+    if (subLabelEl) {
+      subLabelEl.innerHTML = `↳ ${escapeHtml(item.name || `Item ${index + 1}`)} Total`;
+    }
+    if (subGoldEl) {
+      subGoldEl.textContent = inrWholeFormatter.format(calc.baseGoldValue);
+    }
+    if (subMakingEl) {
+      subMakingEl.textContent = inrWholeFormatter.format(calc.grossMakingRupees);
+    }
+    if (subStoneEl) {
+      subStoneEl.textContent = inrWholeFormatter.format(calc.stoneCharge);
+    }
+    if (subDiscountEl) {
+      subDiscountEl.textContent = calc.discountSavingsRupees > 0 
+        ? `Saved ${inrWholeFormatter.format(calc.discountSavingsRupees)}`
+        : 'Saved ₹0';
+    }
+    if (subEffMakingEl) {
+      subEffMakingEl.textContent = inrWholeFormatter.format(calc.effectiveMakingRupees);
+    }
+    if (subGstEl) {
+      subGstEl.textContent = inrWholeFormatter.format(calc.gstRupees);
+    }
+    if (subOldGoldEl) {
+      subOldGoldEl.textContent = calc.oldGoldValue > 0 
+        ? `-₹${Math.round(calc.oldGoldValue).toLocaleString('en-IN')}` 
+        : '₹0';
+    }
+    if (subDepositEl) {
+      subDepositEl.textContent = calc.depositAmount > 0 
+        ? `-₹${Math.round(calc.depositAmount).toLocaleString('en-IN')}` 
+        : '₹0';
+    }
+    if (subFinalEl) {
+      if (calc.refundAmount > 0) {
+        subFinalEl.innerHTML = `<span style="color:#059669; font-weight:800;">Refund: ${inrWholeFormatter.format(calc.refundAmount)}</span>`;
+      } else {
+        subFinalEl.textContent = inrWholeFormatter.format(calc.finalPrice);
+      }
+    }
+  });
+
+  // Calculate Overall Net Balance across all items
+  const totalGrossAllItems = round2(totalBaseGold + totalEffectiveMaking + totalStone + totalGst);
+  const totalCreditsAllItems = round2(totalOldGoldValue + totalDeposit);
+  const overallDiff = round2(totalGrossAllItems - totalCreditsAllItems);
+  const overallNetPayable = overallDiff > 0 ? overallDiff : 0;
+  const overallRefund = overallDiff < 0 ? round2(Math.abs(overallDiff)) : 0;
+
+  // Update Bottom Total Row (Grand Total)
+  const totalRowLabel = document.getElementById('total-row-label');
+  if (totalRowLabel) {
+    totalRowLabel.textContent = appState.items.length > 1 ? `GRAND TOTAL (${appState.items.length} Items)` : 'TOTAL';
+  }
+
+  // Column 1 (Weight): Displays pure gold price according to gold rate with weight subtext
+  const totalWeightEl = document.getElementById('total-weight-display');
+  if (totalWeightEl) {
+    totalWeightEl.innerHTML = `${inrWholeFormatter.format(totalBaseGold)}<span class="footer-subtext">(${totalWeight.toFixed(3)} g)</span>`;
+  }
+
+  // Column 2 (Making Charge): Displays initially charged making amount in ₹
+  const totalMakingEl = document.getElementById('total-making-display');
+  if (totalMakingEl) {
+    totalMakingEl.innerHTML = `${inrWholeFormatter.format(totalGrossMaking)}<span class="footer-subtext">(Initial)</span>`;
+  }
+
+  // Column 3 (Stone Charge): Displays stone charges amount in ₹
+  const totalStoneEl = document.getElementById('total-stone-display');
+  if (totalStoneEl) {
+    totalStoneEl.textContent = inrWholeFormatter.format(totalStone);
+  }
+
+  // Column 4 (Discount on Making Charges): Displays discount savings amount in ₹
+  const totalDiscountEl = document.getElementById('total-discount-savings-display');
+  if (totalDiscountEl) {
+    totalDiscountEl.textContent = `Saved ${inrWholeFormatter.format(totalDiscountSavings)}`;
+  }
+  
+  // Column 5 (Effective Making Charge): Displays charged amount after effective making charges in ₹
+  const avgEffectiveMaking = totalBaseGold > 0 ? (totalEffectiveMaking / totalBaseGold) * 100 : 0;
+  const avgEffectiveMakingEl = document.getElementById('avg-effective-making-display');
+  if (avgEffectiveMakingEl) {
+    avgEffectiveMakingEl.innerHTML = `${inrWholeFormatter.format(totalEffectiveMaking)}<span class="footer-subtext">(${avgEffectiveMaking.toFixed(2)}% eff.)</span>`;
+  }
+
+  // Column 6 (GST): Displays GST amount in ₹
+  const totalGstEl = document.getElementById('total-gst-display');
+  if (totalGstEl) {
+    totalGstEl.textContent = inrWholeFormatter.format(totalGst);
+  }
+  
+  // Column 7 (Old Gold): Displays total Old Gold exchange deduction
+  const totalOldGoldEl = document.getElementById('total-oldgold-display');
+  if (totalOldGoldEl) {
+    totalOldGoldEl.innerHTML = totalOldGoldValue > 0 
+      ? `-₹${Math.round(totalOldGoldValue).toLocaleString('en-IN')}<span class="footer-subtext">(${totalOldGoldWeight.toFixed(3)} g)</span>`
+      : '₹0';
+  }
+
+  // Column 8 (Amount Deposited): Displays total advance deposited
+  const totalDepositEl = document.getElementById('total-deposit-display');
+  if (totalDepositEl) {
+    totalDepositEl.textContent = totalDeposit > 0 ? `-₹${Math.round(totalDeposit).toLocaleString('en-IN')}` : '₹0';
+  }
+
+  // Column 9 (Final Price): Displays Net Payable and Customer Refund if excess
+  const grandTotalEl = document.getElementById('grand-total-display');
+  const grandRefundEl = document.getElementById('grand-refund-display');
+  if (grandTotalEl) {
+    grandTotalEl.textContent = inrWholeFormatter.format(overallNetPayable);
+  }
+  if (grandRefundEl) {
+    if (overallRefund > 0) {
+      grandRefundEl.innerHTML = `<span class="total-refund-pill" title="Excess advance to be refunded">Refund Customer: ${inrWholeFormatter.format(overallRefund)}</span>`;
+    } else {
+      grandRefundEl.innerHTML = '';
+    }
+  }
+
+  // Update Summary Cards Grid
+  document.getElementById('card-gold-value').textContent = inrWholeFormatter.format(totalBaseGold);
+  document.getElementById('card-gold-weight').textContent = `${totalWeight.toFixed(3)} grams total`;
+
+  document.getElementById('card-making-charges').textContent = inrWholeFormatter.format(totalEffectiveMaking);
+  document.getElementById('card-making-savings').textContent = `You save ₹${Math.round(totalDiscountSavings).toLocaleString('en-IN')} in discounts!`;
+
+  document.getElementById('card-stone-charges').textContent = inrWholeFormatter.format(totalStone);
+  document.getElementById('card-gst-charges').textContent = inrWholeFormatter.format(totalGst);
+
+  document.getElementById('card-oldgold-value').textContent = 
+    totalOldGoldValue > 0 ? `-₹${Math.round(totalOldGoldValue).toLocaleString('en-IN')}` : '₹0';
+  document.getElementById('card-oldgold-weight').textContent = 
+    `${totalOldGoldWeight.toFixed(3)} g exchanged`;
+
+  const cardDepositVal = document.getElementById('card-deposit-value');
+  const cardDepositMeta = document.getElementById('card-deposit-meta');
+  if (cardDepositVal) {
+    cardDepositVal.textContent = totalDeposit > 0 ? `-₹${Math.round(totalDeposit).toLocaleString('en-IN')}` : '₹0';
+  }
+  if (cardDepositMeta) {
+    cardDepositMeta.textContent = totalDeposit > 0 ? `₹${Math.round(totalDeposit).toLocaleString('en-IN')} advance paid` : 'No advance paid';
+  }
+
+  // Hero Total Card & Customer Refund Banner
+  document.getElementById('card-grand-total').textContent = inrWholeFormatter.format(overallNetPayable);
+  document.getElementById('hero-items-count').textContent = `${appState.items.length} ${appState.items.length === 1 ? 'Item' : 'Items'}`;
+  
+  const heroBadge = document.getElementById('hero-total-badge');
+  const heroNote = document.getElementById('hero-total-note');
+  const heroRefundBanner = document.getElementById('hero-refund-banner');
+  if (overallRefund > 0) {
+    if (heroBadge) heroBadge.textContent = 'NET PAYABLE: ₹0 • REFUND DUE';
+    if (heroNote) heroNote.textContent = `Advance exceeds total jewellery charges. Refund ₹${Math.round(overallRefund).toLocaleString('en-IN')} to customer.`;
+    if (heroRefundBanner) {
+      heroRefundBanner.innerHTML = `
+        <div class="hero-refund-box">
+          <span class="hero-refund-tag">REFUND TO CUSTOMER</span>
+          <span class="hero-refund-amount">${inrWholeFormatter.format(overallRefund)}</span>
+          <span class="hero-refund-sub">Excess advance deposited beyond total jewellery price</span>
+        </div>
+      `;
+    }
+  } else {
+    if (heroBadge) heroBadge.textContent = 'NET PAYABLE AMOUNT';
+    if (heroNote) heroNote.textContent = 'After Making, Discounts, GST, Old Gold & Advance Deposits';
+    if (heroRefundBanner) heroRefundBanner.innerHTML = '';
+  }
+
+  const totalCombinedDeductions = totalDiscountSavings + totalOldGoldValue + totalDeposit;
+  document.getElementById('hero-total-savings').textContent = 
+    totalCombinedDeductions > 0 ? `Total Deductions: ₹${Math.round(totalCombinedDeductions).toLocaleString('en-IN')}` : 'Total Deductions: ₹0';
+
+  // Update Mobile Sticky Bar
+  document.getElementById('sticky-count').textContent = appState.items.length;
+  if (overallRefund > 0) {
+    document.getElementById('sticky-total').textContent = `₹0 (Refund: ${inrWholeFormatter.format(overallRefund)})`;
+  } else {
+    document.getElementById('sticky-total').textContent = inrWholeFormatter.format(overallNetPayable);
+  }
+  
+  let stickyDeductSummary = `(Saved ₹${Math.round(totalDiscountSavings).toLocaleString('en-IN')})`;
+  if (totalOldGoldValue > 0 && totalDeposit > 0) {
+    stickyDeductSummary = `(Old Gold -₹${Math.round(totalOldGoldValue).toLocaleString('en-IN')} | Adv -₹${Math.round(totalDeposit).toLocaleString('en-IN')})`;
+  } else if (totalOldGoldValue > 0) {
+    stickyDeductSummary = `(Old Gold -₹${Math.round(totalOldGoldValue).toLocaleString('en-IN')})`;
+  } else if (totalDeposit > 0) {
+    stickyDeductSummary = `(Advance -₹${Math.round(totalDeposit).toLocaleString('en-IN')})`;
+  }
+  document.getElementById('sticky-savings').textContent = stickyDeductSummary;
+
+  // Save to LocalStorage
+  saveStateToStorage();
+}
+
+/**
+ * Handle input changes dynamically on keystrokes
+ */
+function handleTableInput(e) {
+  const target = e.target;
+  const tr = target.closest('tr');
+  if (!tr) return;
+
+  const itemId = tr.dataset.itemId;
+  const field = target.dataset.field;
+  if (!field) return;
+
+  const item = appState.items.find(i => i.id === itemId);
+  if (!item) return;
+
+  // Store the raw typed value directly so partial numbers like '16.', '19.9', '0.' are preserved
+  item[field] = target.value;
+
+  // Update calculations without destroying or touching DOM inputs!
+  updateCalculations();
+}
+
+/**
+ * Handle select dropdown changes dynamically (Item purity, Old Gold purity)
+ */
+function handleTableSelectChange(e) {
+  const target = e.target;
+  const tr = target.closest('tr');
+  if (!tr) return;
+
+  const itemId = tr.dataset.itemId;
+  const field = target.dataset.field;
+  if (!field) return;
+
+  const item = appState.items.find(i => i.id === itemId);
+  if (!item) return;
+
+  item[field] = target.value;
+  updateCalculations();
+}
+
+/**
+ * Add a new item row
+ */
+function addNewItem(preset = null) {
+  const count = appState.items.length + 1;
+  const newItem = {
+    id: 'item-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+    name: preset?.name || `Item ${count}`,
+    purity: preset?.purity || '22k',
+    weight: preset?.weight !== undefined ? String(preset.weight) : '',
+    makingCharge: preset?.making !== undefined ? String(preset.making) : '',
+    stoneCharge: preset?.stone !== undefined ? String(preset.stone) : '0',
+    discount: preset?.discount !== undefined ? String(preset.discount) : '',
+    oldGold: preset?.oldGold !== undefined ? String(preset.oldGold) : '',
+    oldGoldPurity: preset?.oldGoldPurity || '22k',
+    deposit: preset?.deposit !== undefined ? String(preset.deposit) : '',
+    gst: 3
+  };
+
+  appState.items.push(newItem);
+  renderTableStructure();
+  showToast(`Added ${newItem.name}`);
+}
+
+/**
+ * Duplicate an existing row
+ */
+function duplicateItem(id) {
+  const index = appState.items.findIndex(i => i.id === id);
+  if (index === -1) return;
+
+  const orig = appState.items[index];
+  const copy = {
+    ...JSON.parse(JSON.stringify(orig)),
+    id: 'item-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+    name: `${orig.name} (Copy)`
+  };
+
+  appState.items.splice(index + 1, 0, copy);
+  renderTableStructure();
+  showToast(`Duplicated ${orig.name}`);
+}
+
+/**
+ * Delete a row
+ */
+function deleteItem(id) {
+  if (appState.items.length <= 1) {
+    showToast('At least one item must remain in calculator');
+    return;
+  }
+
+  const item = appState.items.find(i => i.id === id);
+  const name = item ? item.name : 'Item';
+  appState.items = appState.items.filter(i => i.id !== id);
+  renderTableStructure();
+  showToast(`Removed ${name}`);
+}
+
+/**
+ * Show detailed calculation breakdown in modal
+ */
+function showItemBreakdown(id) {
+  const item = appState.items.find(i => i.id === id);
+  if (!item) return;
+
+  const calc = calculateItem(item);
+
+  document.getElementById('modal-item-title').textContent = `${item.name || 'Item'} (${calc.itemPurity.toUpperCase()}) — Price Calculation Breakdown`;
+  document.getElementById('modal-item-subtitle').textContent = `Valuation at ₹${calc.itemRate.toLocaleString('en-IN')}/g (${calc.itemPurity.toUpperCase()} Gold Rate)`;
+
+  const modalContent = document.getElementById('modal-item-content');
+  modalContent.innerHTML = `
+    <div class="audit-row">
+      <span>1. Purity of New Item:</span>
+      <strong>${calc.itemPurity.toUpperCase()} (Rate: ₹${calc.itemRate.toLocaleString('en-IN')} / g)</strong>
+    </div>
+    <div class="audit-row">
+      <span>2. Weight of New Item:</span>
+      <strong>${calc.weight.toFixed(3)} grams</strong>
+    </div>
+    <div class="audit-row">
+      <span>3. Pure Gold Value (Weight &times; ${calc.itemPurity.toUpperCase()} Rate):</span>
+      <strong>₹${Math.round(calc.baseGoldValue).toLocaleString('en-IN')}</strong>
+    </div>
+    <div class="audit-row">
+      <span>4. Initial Making Charge:</span>
+      <span>${calc.initialMakingPercent}% of Gold Value (<del>₹${Math.round(calc.grossMakingRupees).toLocaleString('en-IN')}</del>)</span>
+    </div>
+    <div class="audit-row">
+      <span>5. Making Charge Discount:</span>
+      <span style="color:var(--success-green); font-weight:700">
+        ${calc.discountPercent}% Off (-₹${Math.round(calc.discountSavingsRupees).toLocaleString('en-IN')})
+      </span>
+    </div>
+    <div class="audit-row">
+      <span>6. Effective Making Charge:</span>
+      <span><strong>${calc.effectiveMakingPercent}%</strong> = <strong>₹${Math.round(calc.effectiveMakingRupees).toLocaleString('en-IN')}</strong></span>
+    </div>
+    <div class="audit-row">
+      <span>7. Stone &amp; Gem Charges:</span>
+      <strong>₹${calc.stoneCharge.toLocaleString('en-IN')}</strong>
+    </div>
+    <div class="audit-row" style="background:#FAF6EE; padding:8px 8px; border-radius:6px; margin:4px 0;">
+      <span><strong>Subtotal (Pre-Tax):</strong><br><small style="color:var(--text-muted)">(Gold + Eff. Making + Stone)</small></span>
+      <strong style="font-size:1.02rem;">₹${Math.round(calc.preTaxSubtotal).toLocaleString('en-IN')}</strong>
+    </div>
+    <div class="audit-row">
+      <span>8. GST (3% Fixed on Subtotal):</span>
+      <strong>₹${Math.round(calc.gstRupees).toLocaleString('en-IN')}</strong>
+    </div>
+    <div class="audit-row" style="background:#FAF8F5; padding:8px 8px; border-radius:6px; margin:4px 0;">
+      <span><strong>Gross Jewellery Amount:</strong></span>
+      <strong>₹${Math.round(calc.grossItemTotal).toLocaleString('en-IN')}</strong>
+    </div>
+    ${calc.oldGoldWeight > 0 ? `
+      <div class="audit-row" style="color:#B45309; background:#FEF3C7; padding:8px 8px; border-radius:6px; margin:4px 0;">
+        <span><strong>Less: ${calc.oldGoldPurity.toUpperCase()} Old Gold Exchanged:</strong><br><small>${calc.oldGoldWeight}g &times; ₹${calc.oldGoldRate.toLocaleString('en-IN')}/g (${calc.oldGoldPurity.toUpperCase()} Rate)</small></span>
+        <strong style="font-size:1.05rem;">-₹${Math.round(calc.oldGoldValue).toLocaleString('en-IN')}</strong>
+      </div>
+    ` : ''}
+    ${calc.depositAmount > 0 ? `
+      <div class="audit-row" style="color:#065F46; background:#D1FAE5; padding:8px 8px; border-radius:6px; margin:4px 0;">
+        <span><strong>Less: Amount Deposited (Advance Paid):</strong><br><small>Advance amount already deposited for this item</small></span>
+        <strong style="font-size:1.05rem;">-₹${Math.round(calc.depositAmount).toLocaleString('en-IN')}</strong>
+      </div>
+    ` : ''}
+    ${calc.refundAmount > 0 ? `
+      <div class="audit-row refund-highlight" style="background:#ECFDF5; border:1.5px solid #10B981; padding:10px 12px; border-radius:6px; margin:8px 0; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <strong style="color:#065F46; font-size:1rem; display:block;">EXCESS ADVANCE REFUND DUE:</strong>
+          <small style="color:#047857;">Advance payment exceeds gross jewellery price</small>
+        </div>
+        <strong style="font-size:1.35rem; color:#059669;">${inrWholeFormatter.format(calc.refundAmount)}</strong>
+      </div>
+    ` : ''}
+    <div class="audit-row highlight">
+      <span>FINAL NET PAYABLE AMOUNT:</span>
+      <span style="font-size:1.35rem; color:var(--malabar-maroon);">
+        ${inrWholeFormatter.format(calc.finalPrice)}
+      </span>
+    </div>
+  `;
+
+  document.getElementById('breakdown-modal').classList.remove('hidden');
+}
+
+/**
+ * Share summary / Copy WhatsApp quotation slip
+ */
+function shareWhatsAppQuotation() {
+  const dateStr = quotationDate.toLocaleDateString('en-IN', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+
+  let text = `👑 *MALABAR GOLD & DIAMONDS*\n`;
+  text += `*Jewellery Estimation & Price Quotation*\n`;
+  text += `📅 Date: ${dateStr}\n`;
+  text += `✨ Today's 22k Gold Rate: ₹${appState.goldRate.toLocaleString('en-IN')} / g\n`;
+  text += `✨ Today's 18k Gold Rate: ₹${appState.goldRate18k.toLocaleString('en-IN')} / g\n`;
+  text += `✨ Today's 24k Gold Rate: ₹${appState.goldRate24k.toLocaleString('en-IN')} / g\n`;
+  text += `------------------------------------\n\n`;
+
+  let totalWeight = 0;
+  let totalOldGoldGrams = 0;
+  let totalOldGoldCredit = 0;
+  let totalDeposit = 0;
+  let grandTotal = 0;
+  let totalSavings = 0;
+
+  appState.items.forEach((item, idx) => {
+    const calc = calculateItem(item);
+    totalWeight += calc.weight;
+    totalOldGoldGrams += calc.oldGoldWeight;
+    totalOldGoldCredit += calc.oldGoldValue;
+    totalDeposit += calc.depositAmount;
+    grandTotal += calc.finalPrice;
+    totalSavings += calc.discountSavingsRupees;
+
+    text += `*${idx + 1}. ${item.name || `Item ${idx + 1}`} (${calc.itemPurity.toUpperCase()})*\n`;
+    text += `   • Rate: ₹${calc.itemRate.toLocaleString('en-IN')}/g (${calc.itemPurity.toUpperCase()})\n`;
+    text += `   • Weight: ${calc.weight} g\n`;
+    text += `   • Making: ${calc.initialMakingPercent}% (Discount: ${calc.discountPercent}% → Eff: ${calc.effectiveMakingPercent}%)\n`;
+    if (calc.stoneCharge > 0) {
+      text += `   • Stone Charge: ₹${calc.stoneCharge.toLocaleString('en-IN')}\n`;
+    }
+    if (calc.oldGoldWeight > 0) {
+      text += `   • Old Gold (${calc.oldGoldPurity.toUpperCase()}): ${calc.oldGoldWeight} g (-₹${Math.round(calc.oldGoldValue).toLocaleString('en-IN')})\n`;
+    }
+    if (calc.depositAmount > 0) {
+      text += `   • Amount Deposited: -₹${Math.round(calc.depositAmount).toLocaleString('en-IN')}\n`;
+    }
+    if (calc.refundAmount > 0) {
+      text += `   • Net Payable: *₹0* (Customer Refund Due: *${inrWholeFormatter.format(calc.refundAmount)}*)\n\n`;
+    } else {
+      text += `   • Price (incl. 3% GST): *${inrWholeFormatter.format(calc.finalPrice)}*\n\n`;
+    }
+  });
+
+  const totalGrossQuotation = round2(totalWeight > 0 ? (appState.items.reduce((s, it) => s + (calculateItem(it).grossItemTotal), 0)) : 0);
+  const totalCreditsQuotation = round2(totalOldGoldCredit + totalDeposit);
+  const quotationDiff = round2(totalGrossQuotation - totalCreditsQuotation);
+  const quotationPayable = quotationDiff > 0 ? quotationDiff : 0;
+  const quotationRefund = quotationDiff < 0 ? round2(Math.abs(quotationDiff)) : 0;
+
+  text += `------------------------------------\n`;
+  text += `⚖️ *Total New Gold Weight:* ${totalWeight.toFixed(3)} grams\n`;
+  if (totalOldGoldGrams > 0) {
+    text += `🔄 *Total Old Gold Exchanged:* ${totalOldGoldGrams.toFixed(3)} g (-₹${Math.round(totalOldGoldCredit).toLocaleString('en-IN')})\n`;
+  }
+  if (totalDeposit > 0) {
+    text += `💵 *Total Advance Deposited:* -₹${Math.round(totalDeposit).toLocaleString('en-IN')}\n`;
+  }
+  text += `🎉 *Making Charge Discount Saved:* ₹${Math.round(totalSavings).toLocaleString('en-IN')}\n`;
+  if (quotationRefund > 0) {
+    text += `💰 *FINAL NET PAYABLE TOTAL:* *₹0*\n`;
+    text += `💚 *CUSTOMER REFUND DUE (EXCESS ADVANCE):* *${inrWholeFormatter.format(quotationRefund)}*\n`;
+  } else {
+    text += `💰 *FINAL NET PAYABLE TOTAL:* *${inrWholeFormatter.format(quotationPayable)}*\n`;
+  }
+  text += `------------------------------------\n`;
+  text += `_Valid as per today's prevailing gold rates. Malabar Promise of Purity & Transparency._`;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('Quotation copied to clipboard! Ready to paste into WhatsApp.');
+    }).catch(() => {
+      prompt('Copy your quotation slip below:', text);
+    });
+  } else {
+    prompt('Copy your quotation slip below:', text);
+  }
+}
+
+/**
+ * Setup print table before printing
+ */
+function preparePrintQuotation() {
+  const dateStr = quotationDate.toLocaleDateString('en-IN', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+
+  document.getElementById('print-date').textContent = dateStr;
+  document.getElementById('print-rate').textContent = `₹${appState.goldRate.toLocaleString('en-IN')}`;
+  document.getElementById('print-rate-18k').textContent = `₹${appState.goldRate18k.toLocaleString('en-IN')}`;
+  document.getElementById('print-rate-24k').textContent = `₹${appState.goldRate24k.toLocaleString('en-IN')}`;
+  document.getElementById('print-id').textContent = `MGD-${Date.now().toString().slice(-6)}`;
+
+  const printTbody = document.getElementById('print-tbody');
+  printTbody.innerHTML = '';
+
+  let totalWeight = 0;
+  let totalGold = 0;
+  let totalEffMaking = 0;
+  let totalStone = 0;
+  let totalGst = 0;
+  let totalOldGold = 0;
+  let totalOldGoldCredit = 0;
+  let totalDeposit = 0;
+  let grandTotal = 0;
+
+  appState.items.forEach((item, idx) => {
+    const calc = calculateItem(item);
+    totalWeight += calc.weight;
+    totalGold += calc.baseGoldValue;
+    totalEffMaking += calc.effectiveMakingRupees;
+    totalStone += calc.stoneCharge;
+    totalGst += calc.gstRupees;
+    totalOldGold += calc.oldGoldWeight;
+    totalOldGoldCredit += calc.oldGoldValue;
+    totalDeposit += calc.depositAmount;
+    grandTotal += calc.finalPrice;
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><strong>${item.name || `Item ${idx + 1}`}</strong><br><small style="color:#73132B">${calc.itemPurity.toUpperCase()} @ ₹${calc.itemRate.toLocaleString('en-IN')}/g</small></td>
+      <td>${calc.weight.toFixed(3)} g</td>
+      <td>₹${Math.round(calc.baseGoldValue).toLocaleString('en-IN')}</td>
+      <td>${calc.initialMakingPercent}%</td>
+      <td>${calc.discountPercent > 0 ? `${calc.discountPercent}%` : '—'}</td>
+      <td>₹${Math.round(calc.effectiveMakingRupees).toLocaleString('en-IN')} (${calc.effectiveMakingPercent}%)</td>
+      <td>₹${Math.round(calc.stoneCharge).toLocaleString('en-IN')}</td>
+      <td>₹${Math.round(calc.gstRupees).toLocaleString('en-IN')}</td>
+      <td>${calc.oldGoldWeight > 0 ? `${calc.oldGoldWeight} g (${calc.oldGoldPurity.toUpperCase()})<br><small style="color:#B45309">-₹${Math.round(calc.oldGoldValue).toLocaleString('en-IN')}</small>` : '—'}</td>
+      <td>${calc.depositAmount > 0 ? `-₹${Math.round(calc.depositAmount).toLocaleString('en-IN')}` : '—'}</td>
+      <td>${calc.refundAmount > 0 ? `<strong>₹0</strong><br><small style="color:#059669; font-weight:700;">Refund: ${inrWholeFormatter.format(calc.refundAmount)}</small>` : `<strong>${inrWholeFormatter.format(calc.finalPrice)}</strong>`}</td>
+    `;
+    printTbody.appendChild(row);
+  });
+
+  const totalGrossPrint = round2(totalGold + totalEffMaking + totalStone + totalGst);
+  const totalCreditsPrint = round2(totalOldGoldCredit + totalDeposit);
+  const printDiff = round2(totalGrossPrint - totalCreditsPrint);
+  const printPayable = printDiff > 0 ? printDiff : 0;
+  const printRefund = printDiff < 0 ? round2(Math.abs(printDiff)) : 0;
+
+  const printTfoot = document.getElementById('print-tfoot');
+  printTfoot.innerHTML = `
+    <tr>
+      <td><strong>${appState.items.length === 1 ? 'Item 1 Total' : 'TOTAL'}</strong></td>
+      <td><strong>${totalWeight.toFixed(3)} g</strong></td>
+      <td><strong>${inrWholeFormatter.format(totalGold)}</strong></td>
+      <td>—</td>
+      <td>—</td>
+      <td><strong>₹${Math.round(totalEffMaking).toLocaleString('en-IN')}</strong></td>
+      <td><strong>₹${Math.round(totalStone).toLocaleString('en-IN')}</strong></td>
+      <td><strong>₹${Math.round(totalGst).toLocaleString('en-IN')}</strong></td>
+      <td><strong>${totalOldGold > 0 ? `${totalOldGold.toFixed(3)} g (-₹${Math.round(totalOldGoldCredit).toLocaleString('en-IN')})` : '—'}</strong></td>
+      <td><strong>${totalDeposit > 0 ? `-₹${Math.round(totalDeposit).toLocaleString('en-IN')}` : '—'}</strong></td>
+      <td style="font-size:1.1rem; color:#73132B;">${printRefund > 0 ? `<strong>₹0</strong><br><small style="color:#059669; font-weight:bold;">Refund: ${inrWholeFormatter.format(printRefund)}</small>` : `<strong>${inrWholeFormatter.format(printPayable)}</strong>`}</td>
+    </tr>
+  `;
+
+  window.print();
+}
+
+/**
+ * Toast notification
+ */
+let toastTimer = null;
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.remove('hidden');
+
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.add('hidden');
+  }, 3000);
+}
+
+/**
+ * Safe HTML string escape
+ */
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+/**
+ * LocalStorage Helpers
+ */
+const STORAGE_KEY = 'malabar_calculator_state_v6';
+
+function saveStateToStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+  } catch (e) {
+    // ignore
+  }
+}
+
+function loadStateFromStorage() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed && Array.isArray(parsed.items) && parsed.items.length > 0) {
+        appState.goldRate = Number(parsed.goldRate) || 7450;
+        appState.items = parsed.items.map((it, idx) => ({
+          id: it.id || `item-${idx + 1}`,
+          name: it.name || `Item ${idx + 1}`,
+          purity: it.purity || '22k',
+          weight: it.weight !== undefined && it.weight !== null ? String(it.weight) : '',
+          makingCharge: it.makingCharge !== undefined && it.makingCharge !== null ? String(it.makingCharge) : '',
+          stoneCharge: it.stoneCharge !== undefined && it.stoneCharge !== null ? String(it.stoneCharge) : '0',
+          discount: it.discount !== undefined && it.discount !== null ? String(it.discount) : '',
+          oldGold: it.oldGold !== undefined && it.oldGold !== null ? String(it.oldGold) : '',
+          oldGoldPurity: it.oldGoldPurity || '22k',
+          deposit: it.deposit !== undefined && it.deposit !== null ? String(it.deposit) : '',
+          gst: it.gst !== undefined ? it.gst : 3
+        }));
+      }
+    }
+  } catch (e) {
+    // ignore
+  }
+}
+
+// Active Selected / Live Date Management
+let quotationDate = new Date();
+let isCustomQuotationDate = false;
+
+function isSameCalendarDay(d1, d2) {
+  return d1.getFullYear() === d2.getFullYear() &&
+         d1.getMonth() === d2.getMonth() &&
+         d1.getDate() === d2.getDate();
+}
+
+function formatDateLabel(d) {
+  const isToday = isSameCalendarDay(d, new Date());
+  const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+  const str = d.toLocaleDateString('en-IN', options);
+  return isToday ? `Today: ${str}` : `Date: ${str}`;
+}
+
+function updateDateDisplay() {
+  const displayEl = document.getElementById('live-date-display');
+  const resetBtn = document.getElementById('btn-today-reset');
+  const datePickerInput = document.getElementById('date-picker-input');
+
+  if (displayEl) {
+    displayEl.textContent = formatDateLabel(quotationDate);
+  }
+
+  if (resetBtn) {
+    resetBtn.classList.toggle('hidden', !isCustomQuotationDate);
+  }
+
+  if (datePickerInput) {
+    const yyyy = quotationDate.getFullYear();
+    const mm = String(quotationDate.getMonth() + 1).padStart(2, '0');
+    const dd = String(quotationDate.getDate()).padStart(2, '0');
+    datePickerInput.value = `${yyyy}-${mm}-${dd}`;
+  }
+}
+
+/**
+ * Initialize event listeners
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Load saved state or default
+  loadStateFromStorage();
+
+  // Initialize and display live date
+  quotationDate = new Date();
+  isCustomQuotationDate = false;
+  updateDateDisplay();
+
+  // Auto-update date dynamically as day changes / rolls past midnight
+  setInterval(() => {
+    if (!isCustomQuotationDate) {
+      const now = new Date();
+      if (!isSameCalendarDay(quotationDate, now)) {
+        quotationDate = now;
+        updateDateDisplay();
+      }
+    }
+  }, 30000); // Checks every 30 seconds
+
+  // Date picker & custom date selection
+  const datePicker = document.getElementById('date-picker-input');
+  const dateTrigger = document.getElementById('live-date-trigger');
+  const resetDateBtn = document.getElementById('btn-today-reset');
+
+  function openCalendar() {
+    if (!datePicker) return;
+    try {
+      if (typeof datePicker.showPicker === 'function') {
+        datePicker.showPicker();
+        return;
+      }
+    } catch (err) {
+      console.warn('showPicker error:', err);
+    }
+    // Fallback for older browsers
+    const userDate = prompt('Enter quotation date (YYYY-MM-DD):', datePicker.value);
+    if (userDate && /^\d{4}-\d{2}-\d{2}$/.test(userDate)) {
+      datePicker.value = userDate;
+      datePicker.dispatchEvent(new Event('change'));
+    }
+  }
+
+  if (dateTrigger) {
+    dateTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      openCalendar();
+    });
+  }
+
+  if (datePicker) {
+    datePicker.addEventListener('change', (e) => {
+      if (e.target.value) {
+        const parts = e.target.value.split('-');
+        quotationDate = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+        isCustomQuotationDate = !isSameCalendarDay(quotationDate, new Date());
+        updateDateDisplay();
+        showToast(`Quotation date set to ${formatDateLabel(quotationDate)}`);
+      }
+    });
+  }
+
+  if (resetDateBtn) {
+    resetDateBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      quotationDate = new Date();
+      isCustomQuotationDate = false;
+      updateDateDisplay();
+      showToast("Reset to Today's Live Date");
+    });
+  }
+
+  // Initialize gold rate input
+  const goldRateInput = document.getElementById('gold-rate-input');
+  goldRateInput.value = appState.goldRate;
+
+  // Gold rate input reacts immediately without losing focus, updating 24k and 18k automatically
+  const handleGoldRateInput = (e) => {
+    const val = parseFloat(e.target.value);
+    appState.goldRate = isNaN(val) ? 0 : val;
+    updateCalculations();
+  };
+
+  goldRateInput.addEventListener('input', handleGoldRateInput);
+  goldRateInput.addEventListener('change', handleGoldRateInput);
+  goldRateInput.addEventListener('keyup', handleGoldRateInput);
+
+  // Table input event delegation (instant reactive calculations on typing)
+  const tbody = document.getElementById('items-tbody');
+  tbody.addEventListener('input', handleTableInput);
+
+  // Table select change delegation (purity change, old gold purity change)
+  tbody.addEventListener('change', handleTableSelectChange);
+
+  // Table button action delegation (delete, duplicate, breakdown)
+  tbody.addEventListener('click', (e) => {
+    const actionBtn = e.target.closest('[data-action]');
+    if (actionBtn) {
+      const action = actionBtn.dataset.action;
+      const id = actionBtn.dataset.id;
+      if (action === 'delete') deleteItem(id);
+      if (action === 'duplicate') duplicateItem(id);
+      return;
+    }
+
+    const breakdownBtn = e.target.closest('[data-breakdown-id]');
+    if (breakdownBtn) {
+      const id = breakdownBtn.dataset.breakdownId;
+      showItemBreakdown(id);
+    }
+  });
+
+  // Add Item button
+  document.getElementById('btn-add-item').addEventListener('click', () => addNewItem());
+
+  // Quick preset add buttons
+  document.querySelectorAll('.quick-add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const preset = {
+        name: btn.dataset.name,
+        purity: btn.dataset.purity || '22k',
+        weight: btn.dataset.weight,
+        making: btn.dataset.making,
+        discount: btn.dataset.discount,
+        stone: btn.dataset.stone,
+        oldGold: '',
+        oldGoldPurity: btn.dataset.purity || '22k',
+        deposit: ''
+      };
+      addNewItem(preset);
+    });
+  });
+
+  // Reset table directly to 1 default row (Item 1) without popup
+  document.getElementById('btn-reset-sample').addEventListener('click', () => {
+    appState.items = getDefaultInitialItems();
+    renderTableStructure();
+    showToast('Reset table to 1 default item (Item 1)');
+  });
+
+  // Print buttons
+  document.getElementById('btn-print').addEventListener('click', preparePrintQuotation);
+  document.getElementById('btn-sticky-print').addEventListener('click', preparePrintQuotation);
+
+  // WhatsApp / Share buttons
+  document.getElementById('btn-copy-summary').addEventListener('click', shareWhatsAppQuotation);
+  document.getElementById('btn-sticky-whatsapp').addEventListener('click', shareWhatsAppQuotation);
+
+  // Modal close handlers
+  document.getElementById('modal-close-btn').addEventListener('click', () => {
+    document.getElementById('breakdown-modal').classList.add('hidden');
+  });
+
+  document.getElementById('breakdown-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'breakdown-modal') {
+      document.getElementById('breakdown-modal').classList.add('hidden');
+    }
+  });
+
+  // Escape key to close modal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.getElementById('breakdown-modal').classList.add('hidden');
+    }
+  });
+
+  // Initial build of table DOM structure
+  renderTableStructure();
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malabar Gold & Diamonds | Jewellery Price & Making Charge Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2373132B'/><circle cx='50' cy='50' r='38' fill='none' stroke='%23D4AF37' stroke-width='2'/><polygon points='50,20 58,38 78,41 63,55 67,75 50,65 33,75 37,55 22,41 42,38' fill='%23D4AF37'/></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <span class="brand-crest">
+        <svg viewBox="0 0 24 24" class="crest-icon" fill="currentColor">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+        MALABAR GOLD &amp; DIAMONDS
+      </span>
+      <span class="tagline">CELEBRATING 30+ YEARS OF TRUST • PURITY • TRANSPARENCY</span>
+      <div class="live-date-pill-container" id="date-container">
+        <button type="button" class="live-date-btn" id="live-date-trigger" title="Click to change date or set quotation date">
+          <span class="pulse-dot"></span>
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" class="cal-icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="live-date-display">Today: Mon, 23 Nov 2026</span>
+          <span class="date-edit-hint" title="Click to pick custom date">📅 Edit</span>
+        </button>
+        <button type="button" class="btn-today-reset hidden" id="btn-today-reset" title="Reset back to Today's Live Date">
+          ↺ Today
+        </button>
+        <input type="date" id="date-picker-input" class="hidden-date-input" aria-label="Select Quotation Date" />
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- Header & Brand Presentation -->
+    <section class="brand-hero">
+      <div class="brand-logo-container">
+        <div class="brand-logo-frame">
+          <div class="gold-monogram">M</div>
+        </div>
+        <div class="brand-text-block">
+          <h1 class="brand-title">MALABAR</h1>
+          <p class="brand-subtitle">GOLD &amp; DIAMONDS</p>
+          <span class="calculator-pill">PRECISION BILLING &amp; MAKING CHARGE CALCULATOR</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <button id="btn-print" class="btn btn-outline" title="Print or Save PDF Quotation">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Quotation
+        </button>
+        <button id="btn-copy-summary" class="btn btn-outline" title="Copy Quotation for WhatsApp">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Share WhatsApp Slip
+        </button>
+        <button id="btn-reset-sample" class="btn btn-ghost" title="Reset table to 1 item">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+          Reset Table
+        </button>
+      </div>
+    </section>
+
+    <!-- Prominent Gold Rate Showcase (22K Input + Auto 24K and 18K Rates) -->
+    <section class="rate-banner-container">
+      <div class="rate-showcase-card">
+        <!-- 22K Primary Input -->
+        <div class="rate-tier primary-22k">
+          <div class="rate-tier-badge">
+            <span class="purity-badge-pill gold-22k">22K</span>
+            <span class="hallmark-sub">Standard 916</span>
+          </div>
+          <div class="rate-tier-content">
+            <label for="gold-rate-input" class="rate-label">
+              Today's 22k Gold Rate :
+            </label>
+            <div class="rate-input-wrapper">
+              <span class="currency-symbol">₹</span>
+              <input 
+                type="number" 
+                id="gold-rate-input" 
+                class="rate-input" 
+                value="7450" 
+                min="100" 
+                step="any" 
+                placeholder="7450"
+                title="Enter current 22k gold rate per gram"
+              />
+              <span class="rate-unit">/ gram</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rate-divider"></div>
+
+        <!-- 24K Auto Display -->
+        <div class="rate-tier auto-24k" title="Auto-derived: 22k × 24 / 22">
+          <div class="rate-tier-badge">
+            <span class="purity-badge-pill gold-24k">24K</span>
+            <span class="hallmark-sub">Pure 999</span>
+          </div>
+          <div class="rate-tier-content">
+            <span class="derived-rate-label">24k Pure Rate (Auto)</span>
+            <div class="derived-rate-val-box">
+              <span class="derived-currency">₹</span>
+              <span class="derived-rate-val" id="rate-24k-display">8,127</span>
+              <span class="rate-unit">/ g</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rate-divider"></div>
+
+        <!-- 18K Auto Display -->
+        <div class="rate-tier auto-18k" title="Auto-derived: 22k × 18 / 22">
+          <div class="rate-tier-badge">
+            <span class="purity-badge-pill gold-18k">18K</span>
+            <span class="hallmark-sub">Hallmark 750</span>
+          </div>
+          <div class="rate-tier-content">
+            <span class="derived-rate-label">18k Gold Rate (Auto)</span>
+            <div class="derived-rate-val-box">
+              <span class="derived-currency">₹</span>
+              <span class="derived-rate-val" id="rate-18k-display">6,095</span>
+              <span class="rate-unit">/ g</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculation Formula Hint / Explanation Bar -->
+    <div class="formula-banner">
+      <div class="formula-icon">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      </div>
+      <div class="formula-text">
+        <strong>Multi-Purity Valuation:</strong> 
+        <span><strong>18K Rate</strong> = 22K &times; 18/22</span>
+        <span class="formula-dot">•</span>
+        <span><strong>24K Rate</strong> = 22K &times; 24/22</span>
+        <span class="formula-dot">•</span>
+        <span>Item purchase rates and Old Gold exchange deductions calculate automatically based on selected <strong>22K</strong> or <strong>18K</strong> purity.</span>
+      </div>
+    </div>
+
+    <!-- Main Items Calculator Table (Sketch Layout) -->
+    <section class="table-card">
+      <div class="table-header-bar">
+        <div class="table-title-group">
+          <h2 class="table-title">Gold Items Valuation &amp; Billing Sheet</h2>
+          <p class="table-caption">Edit any field below. Effective making charges, Old Gold deductions, GST, and final prices update in real-time.</p>
+        </div>
+        <div class="table-actions">
+          <button id="btn-add-item" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add New Item
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive-wrapper">
+        <table class="malabar-table" id="calculator-table">
+          <thead>
+            <tr>
+              <th class="col-item">Items &amp; Purity<br><span class="col-sub">22K / 18K / 24K</span></th>
+              <th class="col-weight">Items Weight<br><span class="col-sub">In Grams</span></th>
+              <th class="col-making">Making Charge<br><span class="col-sub">(Initial %)</span></th>
+              <th class="col-stone">Stone Charge<br><span class="col-sub">(₹)</span></th>
+              <th class="col-discount">Discount on making<br><span class="col-sub">charges (%)</span></th>
+              <th class="col-effective">Effective Making<br><span class="col-sub">Charge (%)</span></th>
+              <th class="col-gst">GST<br><span class="col-sub">3% Fixed</span></th>
+              <th class="col-oldgold">Old Gold (g)<br><span class="col-sub">22K / 18K Exchange</span></th>
+              <th class="col-deposit">Amount Deposited<br><span class="col-sub">(₹ Advance)</span></th>
+              <th class="col-final">Final Price<br><span class="col-sub">(₹ Payable)</span></th>
+              <th class="col-actions">Action</th>
+            </tr>
+          </thead>
+          <tbody id="items-tbody">
+            <!-- Dynamically populated rows -->
+          </tbody>
+          <tfoot>
+            <tr class="total-row" id="total-summary-row">
+              <td class="total-label-cell">
+                <div class="total-badge">
+                  <span id="total-row-label">Total</span>
+                </div>
+              </td>
+              <td class="total-value-cell" id="total-weight-display">₹0</td>
+              <td class="total-value-cell" id="total-making-display">₹0</td>
+              <td class="total-value-cell" id="total-stone-display">₹0</td>
+              <td class="total-value-cell" id="total-discount-savings-display">Saved ₹0</td>
+              <td class="total-value-cell" id="avg-effective-making-display">₹0</td>
+              <td class="total-value-cell" id="total-gst-display">₹0</td>
+              <td class="total-value-cell" id="total-oldgold-display">₹0</td>
+              <td class="total-value-cell" id="total-deposit-display">₹0</td>
+              <td class="total-final-cell" id="grand-total-cell">
+                <div id="grand-total-display">₹0</div>
+                <div id="grand-refund-display"></div>
+              </td>
+              <td class="total-actions-cell"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- Quick Row Add Suggestions -->
+      <div class="table-footer-controls">
+        <span class="quick-add-title">Quick Add Preset:</span>
+        <button class="quick-add-btn" data-name="22k Gold Necklace" data-purity="22k" data-weight="35.5" data-making="18" data-discount="20" data-stone="1500">+ 22k Necklace</button>
+        <button class="quick-add-btn" data-name="18k Diamond Ring" data-purity="18k" data-weight="4.5" data-making="22" data-discount="25" data-stone="12000">+ 18k Ring</button>
+        <button class="quick-add-btn" data-name="22k Bangle Pair" data-purity="22k" data-weight="24.0" data-making="15" data-discount="25" data-stone="0">+ 22k Bangles</button>
+        <button class="quick-add-btn" data-name="18k Rose Gold Chain" data-purity="18k" data-weight="14.0" data-making="16" data-discount="15" data-stone="0">+ 18k Chain</button>
+        <button class="quick-add-btn" data-name="24k Gold Coin" data-purity="24k" data-weight="8.0" data-making="3" data-discount="0" data-stone="0">+ 24k 8g Coin</button>
+      </div>
+    </section>
+
+    <!-- Comprehensive Billing Breakdown Cards -->
+    <section class="summary-cards-grid">
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon gold">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>
+          </span>
+          <span class="summary-card-title">Pure Gold Value</span>
+        </div>
+        <div class="summary-card-value" id="card-gold-value">₹0</div>
+        <div class="summary-card-meta" id="card-gold-weight">0.000 grams total</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon maroon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </span>
+          <span class="summary-card-title">Net Making Charges</span>
+        </div>
+        <div class="summary-card-value" id="card-making-charges">₹0</div>
+        <div class="summary-card-meta savings" id="card-making-savings">You save ₹0 in discounts</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon diamond">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 9 12 22 22 9 12 2"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+          </span>
+          <span class="summary-card-title">Stone &amp; Gems Charges</span>
+        </div>
+        <div class="summary-card-value" id="card-stone-charges">₹0</div>
+        <div class="summary-card-meta">Across all items</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon tax">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </span>
+          <span class="summary-card-title">GST (3% Fixed)</span>
+        </div>
+        <div class="summary-card-value" id="card-gst-charges">₹0</div>
+        <div class="summary-card-meta">SGST (1.5%) + CGST (1.5%)</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon oldgold">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
+          <span class="summary-card-title">Old Gold Deducted</span>
+        </div>
+        <div class="summary-card-value" id="card-oldgold-value">₹0</div>
+        <div class="summary-card-meta" id="card-oldgold-weight">0.000 g exchanged</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-header">
+          <span class="summary-card-icon deposit">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><path d="M7 15h2m4 0h4"/></svg>
+          </span>
+          <span class="summary-card-title">Amount Deposited</span>
+        </div>
+        <div class="summary-card-value" id="card-deposit-value">₹0</div>
+        <div class="summary-card-meta" id="card-deposit-meta">No advance paid</div>
+      </div>
+
+      <!-- Hero Total Card -->
+      <div class="summary-card hero-total-card" id="hero-total-card">
+        <div class="hero-total-badge" id="hero-total-badge">NET PAYABLE AMOUNT</div>
+        <div class="hero-total-value" id="card-grand-total">₹0</div>
+        <div id="hero-refund-banner" class="hero-refund-banner-wrap"></div>
+        <div class="hero-total-note" id="hero-total-note">After Making, Discounts, GST, Old Gold &amp; Advance Deposits</div>
+        <div class="hero-total-meta">
+          <span id="hero-items-count">0 Items</span>
+          <span class="meta-sep">•</span>
+          <span id="hero-total-savings">Total Deductions: ₹0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Item Breakdown Drawer Modal / Detail View -->
+    <div id="breakdown-modal" class="modal-overlay hidden">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <h3 class="modal-title" id="modal-item-title">Item Detailed Price Breakdown</h3>
+            <span class="modal-subtitle" id="modal-item-subtitle">Detailed audit and calculations</span>
+          </div>
+          <button class="modal-close" id="modal-close-btn">&times;</button>
+        </div>
+        <div class="modal-body" id="modal-item-content">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Print Only Quotation View -->
+    <div id="print-quotation" class="print-only">
+      <div class="print-header">
+        <div class="print-brand">MALABAR GOLD &amp; DIAMONDS</div>
+        <div class="print-sub">Official Gold Price Estimate &amp; Quotation Slip</div>
+        <div class="print-meta-grid">
+          <div><strong>Date:</strong> <span id="print-date"></span></div>
+          <div><strong>Gold Rates:</strong> 22k: <span id="print-rate"></span>/g • 18k: <span id="print-rate-18k"></span>/g • 24k: <span id="print-rate-24k"></span>/g</div>
+          <div><strong>Quotation ID:</strong> <span id="print-id"></span></div>
+        </div>
+      </div>
+      <table class="print-table" id="print-table">
+        <thead>
+          <tr>
+            <th>Item &amp; Purity</th>
+            <th>Weight (g)</th>
+            <th>Gold Value (₹)</th>
+            <th>Making %</th>
+            <th>Discount</th>
+            <th>Eff. Making (₹)</th>
+            <th>Stone (₹)</th>
+            <th>GST 3% (₹)</th>
+            <th>Old Gold Deducted</th>
+            <th>Amount Deposited</th>
+            <th>Final Price (₹)</th>
+          </tr>
+        </thead>
+        <tbody id="print-tbody">
+          <!-- Print rows -->
+        </tbody>
+        <tfoot id="print-tfoot">
+          <!-- Print totals -->
+        </tfoot>
+      </table>
+      <div class="print-footer">
+        <p>• Prices are calculated according to live 22k gold rates and prevailing making charge discounts.</p>
+        <p>• Standard 3% GST applies as per Government of India jewellery taxation norms.</p>
+        <p>• Thank you for choosing Malabar Gold &amp; Diamonds — Promise of Quality &amp; Purity.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Sticky Mobile / Bottom Summary Bar for quick glance -->
+  <div class="sticky-footer-bar">
+    <div class="sticky-footer-inner">
+      <div class="sticky-info">
+        <span class="sticky-label">Total Payable (<span id="sticky-count">1</span> item):</span>
+        <span class="sticky-amount" id="sticky-total">₹0</span>
+        <span class="sticky-savings" id="sticky-savings">(Saved ₹0 on making charges)</span>
+      </div>
+      <div class="sticky-buttons">
+        <button class="btn btn-sm btn-outline" id="btn-sticky-whatsapp">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+          Share
+        </button>
+        <button class="btn btn-sm btn-primary" id="btn-sticky-print">
+          Print
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
