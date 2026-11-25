@@ -4,6 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Malabar Gold & Diamonds | Jewellery Price & Making Charge Calculator</title>
+  
+  <!-- SEO & Sharing Metadata -->
+  <meta name="description" content="Calculate real-time jewellery prices for 22K, 18K & 24K gold with making charge discounts, 3% GST, old gold exchange deductions, and advance deposits. Official Malabar luxury valuation tool.">
+  <meta name="author" content="Malabar Gold & Diamonds Calculator">
+  
+  <!-- Open Graph / WhatsApp / Facebook Social Preview Card -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://amit-kalal.github.io/malabar-calculator/">
+  <meta property="og:title" content="Malabar Gold & Diamonds | Jewellery Billing & Price Calculator">
+  <meta property="og:description" content="Calculate real-time jewellery prices for 22K, 18K & 24K gold with making charge discounts, 3% GST, old gold exchange deductions, and advance deposits.">
+  <meta property="og:image" content="https://amit-kalal.github.io/malabar-calculator/preview-banner.jpg">
+  <meta property="og:image:secure_url" content="https://amit-kalal.github.io/malabar-calculator/preview-banner.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Malabar Gold & Diamonds Calculator">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://amit-kalal.github.io/malabar-calculator/">
+  <meta name="twitter:title" content="Malabar Gold & Diamonds | Jewellery Billing & Price Calculator">
+  <meta name="twitter:description" content="Calculate real-time jewellery prices for 22K, 18K & 24K gold with making charge discounts, 3% GST, old gold exchange deductions, and advance deposits.">
+  <meta name="twitter:image" content="https://amit-kalal.github.io/malabar-calculator/preview-banner.jpg">
+
+  <!-- Mobile Browser Theme Color -->
+  <meta name="theme-color" content="#73132B">
+  <meta name="msapplication-navbutton-color" content="#73132B">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1824,10 +1853,10 @@ body {
                 type="number" 
                 id="gold-rate-input" 
                 class="rate-input" 
-                value="7450" 
-                min="100" 
+                value="" 
+                min="0" 
                 step="any" 
-                placeholder="7450"
+                placeholder="0"
                 title="Enter current 22k gold rate per gram"
               />
               <span class="rate-unit">/ gram</span>
@@ -1847,7 +1876,7 @@ body {
             <span class="derived-rate-label">24k Pure Rate (Auto)</span>
             <div class="derived-rate-val-box">
               <span class="derived-currency">₹</span>
-              <span class="derived-rate-val" id="rate-24k-display">8,127</span>
+              <span class="derived-rate-val" id="rate-24k-display">0</span>
               <span class="rate-unit">/ g</span>
             </div>
           </div>
@@ -1865,7 +1894,7 @@ body {
             <span class="derived-rate-label">18k Gold Rate (Auto)</span>
             <div class="derived-rate-val-box">
               <span class="derived-currency">₹</span>
-              <span class="derived-rate-val" id="rate-18k-display">6,095</span>
+              <span class="derived-rate-val" id="rate-18k-display">0</span>
               <span class="rate-unit">/ g</span>
             </div>
           </div>
@@ -2150,9 +2179,9 @@ function getDefaultInitialItems() {
 
 // App State
 let appState = {
-  goldRate: 7450, // Today's 22k gold rate in INR per gram
-  goldRate24k: Math.round(7450 * (24 / 22)), // Auto-derived 24k rate (~8127)
-  goldRate18k: Math.round(7450 * (18 / 22)), // Auto-derived 18k rate (~6095)
+  goldRate: 0, // Today's 22k gold rate in INR per gram (defaults to 0 on launch)
+  goldRate24k: 0, // Auto-derived 24k rate
+  goldRate18k: 0, // Auto-derived 18k rate
   items: getDefaultInitialItems()
 };
 
@@ -2301,6 +2330,13 @@ function renderTableStructure() {
     const currentPurity = (item.purity || '22k').toLowerCase();
     const currentOldGoldPurity = (item.oldGoldPurity || '22k').toLowerCase();
 
+    const rateLabel22 = appState.goldRate > 0 ? `22K (${inrWholeFormatter.format(appState.goldRate)}/g)` : '22K';
+    const rateLabel18 = appState.goldRate18k > 0 ? `18K (${inrWholeFormatter.format(appState.goldRate18k)}/g)` : '18K';
+    const rateLabel24 = appState.goldRate24k > 0 ? `24K (${inrWholeFormatter.format(appState.goldRate24k)}/g)` : '24K';
+
+    const ogRateLabel22 = appState.goldRate > 0 ? `22K Old Gold (${inrWholeFormatter.format(appState.goldRate)}/g)` : '22K Old Gold';
+    const ogRateLabel18 = appState.goldRate18k > 0 ? `18K Old Gold (${inrWholeFormatter.format(appState.goldRate18k)}/g)` : '18K Old Gold';
+
     tr.innerHTML = `
       <!-- Column 1: Items & Purity -->
       <td>
@@ -2314,12 +2350,12 @@ function renderTableStructure() {
             title="Edit item name"
           />
           <select class="purity-select" id="purity-select-${item.id}" data-field="purity" title="Item Gold Purity">
-            <option value="22k" ${currentPurity === '22k' ? 'selected' : ''}>22K (${inrWholeFormatter.format(appState.goldRate)}/g)</option>
-            <option value="18k" ${currentPurity === '18k' ? 'selected' : ''}>18K (${inrWholeFormatter.format(appState.goldRate18k)}/g)</option>
-            <option value="24k" ${currentPurity === '24k' ? 'selected' : ''}>24K (${inrWholeFormatter.format(appState.goldRate24k)}/g)</option>
+            <option value="22k" ${currentPurity === '22k' ? 'selected' : ''}>${rateLabel22}</option>
+            <option value="18k" ${currentPurity === '18k' ? 'selected' : ''}>${rateLabel18}</option>
+            <option value="24k" ${currentPurity === '24k' ? 'selected' : ''}>${rateLabel24}</option>
           </select>
           <div class="item-rate-subtext" id="rate-subtext-${item.id}">
-            Rate: ${inrWholeFormatter.format(getRateForPurity(currentPurity))}/g
+            Rate: ${appState.goldRate > 0 ? inrWholeFormatter.format(getRateForPurity(currentPurity)) + '/g' : '₹0/g'}
           </div>
         </div>
       </td>
@@ -2433,8 +2469,8 @@ function renderTableStructure() {
           </div>
           <div class="oldgold-purity-row">
             <select class="oldgold-purity-select" id="oldgold-purity-select-${item.id}" data-field="oldGoldPurity" title="Select 22K or 18K Old Gold">
-              <option value="22k" ${currentOldGoldPurity === '22k' ? 'selected' : ''}>22K Old Gold (${inrWholeFormatter.format(appState.goldRate)}/g)</option>
-              <option value="18k" ${currentOldGoldPurity === '18k' ? 'selected' : ''}>18K Old Gold (${inrWholeFormatter.format(appState.goldRate18k)}/g)</option>
+              <option value="22k" ${currentOldGoldPurity === '22k' ? 'selected' : ''}>${ogRateLabel22}</option>
+              <option value="18k" ${currentOldGoldPurity === '18k' ? 'selected' : ''}>${ogRateLabel18}</option>
             </select>
           </div>
           <div class="oldgold-deduction-wrap" id="oldgold-deduct-${item.id}">
@@ -2560,14 +2596,14 @@ function renderTableStructure() {
  */
 function updateCalculations() {
   // 1. Recalculate 24k and 18k rates from current 22k gold rate
-  appState.goldRate24k = Math.round(appState.goldRate * (24 / 22));
-  appState.goldRate18k = Math.round(appState.goldRate * (18 / 22));
+  appState.goldRate24k = appState.goldRate > 0 ? Math.round(appState.goldRate * (24 / 22)) : 0;
+  appState.goldRate18k = appState.goldRate > 0 ? Math.round(appState.goldRate * (18 / 22)) : 0;
 
   // Update top banner auto-display cards
   const el24k = document.getElementById('rate-24k-display');
   const el18k = document.getElementById('rate-18k-display');
-  if (el24k) el24k.textContent = appState.goldRate24k.toLocaleString('en-IN');
-  if (el18k) el18k.textContent = appState.goldRate18k.toLocaleString('en-IN');
+  if (el24k) el24k.textContent = appState.goldRate24k > 0 ? appState.goldRate24k.toLocaleString('en-IN') : '0';
+  if (el18k) el18k.textContent = appState.goldRate18k > 0 ? appState.goldRate18k.toLocaleString('en-IN') : '0';
 
   let totalWeight = 0;
   let totalBaseGold = 0;
@@ -2611,9 +2647,9 @@ function updateCalculations() {
       const opt22 = puritySelect.querySelector('option[value="22k"]');
       const opt18 = puritySelect.querySelector('option[value="18k"]');
       const opt24 = puritySelect.querySelector('option[value="24k"]');
-      if (opt22) opt22.textContent = `22K (${inrWholeFormatter.format(appState.goldRate)}/g)`;
-      if (opt18) opt18.textContent = `18K (${inrWholeFormatter.format(appState.goldRate18k)}/g)`;
-      if (opt24) opt24.textContent = `24K (${inrWholeFormatter.format(appState.goldRate24k)}/g)`;
+      if (opt22) opt22.textContent = appState.goldRate > 0 ? `22K (${inrWholeFormatter.format(appState.goldRate)}/g)` : '22K';
+      if (opt18) opt18.textContent = appState.goldRate18k > 0 ? `18K (${inrWholeFormatter.format(appState.goldRate18k)}/g)` : '18K';
+      if (opt24) opt24.textContent = appState.goldRate24k > 0 ? `24K (${inrWholeFormatter.format(appState.goldRate24k)}/g)` : '24K';
     }
 
     // Update old gold dropdown option labels with current live gold rates
@@ -2621,16 +2657,18 @@ function updateCalculations() {
     if (oldGoldSelect) {
       const ogOpt22 = oldGoldSelect.querySelector('option[value="22k"]');
       const ogOpt18 = oldGoldSelect.querySelector('option[value="18k"]');
-      if (ogOpt22) ogOpt22.textContent = `22K Old Gold (${inrWholeFormatter.format(appState.goldRate)}/g)`;
-      if (ogOpt18) ogOpt18.textContent = `18K Old Gold (${inrWholeFormatter.format(appState.goldRate18k)}/g)`;
+      if (ogOpt22) ogOpt22.textContent = appState.goldRate > 0 ? `22K Old Gold (${inrWholeFormatter.format(appState.goldRate)}/g)` : '22K Old Gold';
+      if (ogOpt18) ogOpt18.textContent = appState.goldRate18k > 0 ? `18K Old Gold (${inrWholeFormatter.format(appState.goldRate18k)}/g)` : '18K Old Gold';
     }
 
     // Update rate subtext / gold valuation badge directly under item name
     if (rateSubtextEl) {
-      if (calc.weight > 0) {
+      if (calc.weight > 0 && calc.itemRate > 0) {
         rateSubtextEl.innerHTML = `Rate: ${inrWholeFormatter.format(calc.itemRate)}/g <span class="rate-subtext-val">• Gold: ${inrWholeFormatter.format(calc.baseGoldValue)}</span>`;
-      } else {
+      } else if (calc.itemRate > 0) {
         rateSubtextEl.textContent = `Rate: ${inrWholeFormatter.format(calc.itemRate)}/g`;
+      } else {
+        rateSubtextEl.textContent = `Rate: ₹0/g`;
       }
     }
 
@@ -3277,7 +3315,7 @@ function escapeHtml(str) {
 /**
  * LocalStorage Helpers
  */
-const STORAGE_KEY = 'malabar_calculator_state_v6';
+const STORAGE_KEY = 'malabar_calculator_state_v7';
 
 function saveStateToStorage() {
   try {
@@ -3293,7 +3331,7 @@ function loadStateFromStorage() {
     if (saved) {
       const parsed = JSON.parse(saved);
       if (parsed && Array.isArray(parsed.items) && parsed.items.length > 0) {
-        appState.goldRate = Number(parsed.goldRate) || 7450;
+        appState.goldRate = Number(parsed.goldRate) || 0;
         appState.items = parsed.items.map((it, idx) => ({
           id: it.id || `item-${idx + 1}`,
           name: it.name || `Item ${idx + 1}`,
@@ -3429,7 +3467,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize gold rate input
   const goldRateInput = document.getElementById('gold-rate-input');
-  goldRateInput.value = appState.goldRate;
+  goldRateInput.value = appState.goldRate > 0 ? appState.goldRate : '';
 
   // Gold rate input reacts immediately without losing focus, updating 24k and 18k automatically
   const handleGoldRateInput = (e) => {
