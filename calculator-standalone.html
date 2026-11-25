@@ -28,10 +28,17 @@
   <meta name="twitter:description" content="Calculate real-time jewellery prices for 22K, 18K & 24K gold with making charge discounts, 3% GST, old gold exchange deductions, and advance deposits.">
   <meta name="twitter:image" content="https://amit-kalal.github.io/malabar-calculator/preview-banner.jpg">
 
-  <!-- Mobile Browser Theme Color -->
+  <!-- Mobile Browser Theme Color & PWA App Capabilities -->
   <meta name="theme-color" content="#73132B">
   <meta name="msapplication-navbutton-color" content="#73132B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Malabar Gold">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Malabar Gold">
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1819,6 +1826,10 @@ body {
         </div>
       </div>
       <div class="hero-actions">
+        <button id="btn-install-app" class="btn btn-primary hidden" title="Install Malabar Calculator App on your device">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          📲 Install App
+        </button>
         <button id="btn-print" class="btn btn-outline" title="Print or Save PDF Quotation">
           <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
           Print Quotation
@@ -3559,9 +3570,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // PWA Install Prompt handling
+  let deferredPrompt;
+  const installBtn = document.getElementById('btn-install-app');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) {
+      installBtn.classList.remove('hidden');
+      installBtn.onclick = async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const choiceResult = await deferredPrompt.userChoice;
+          if (choiceResult.outcome === 'accepted') {
+            showToast('App installed successfully!');
+          }
+          deferredPrompt = null;
+          installBtn.classList.add('hidden');
+        }
+      };
+    }
+  });
+
+  window.addEventListener('appinstalled', () => {
+    if (installBtn) installBtn.classList.add('hidden');
+    showToast('Malabar Calculator installed as an App!');
+  });
+
   // Initial build of table DOM structure
   renderTableStructure();
 });
+
+// Register Service Worker for PWA (Installable App & Offline Mode)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then((reg) => console.log('Service Worker registered with scope:', reg.scope))
+      .catch((err) => console.warn('Service Worker registration failed:', err));
+  });
+}
 
 </script>
 </body>

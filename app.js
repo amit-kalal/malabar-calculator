@@ -1404,6 +1404,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // PWA Install Prompt handling
+  let deferredPrompt;
+  const installBtn = document.getElementById('btn-install-app');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) {
+      installBtn.classList.remove('hidden');
+      installBtn.onclick = async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const choiceResult = await deferredPrompt.userChoice;
+          if (choiceResult.outcome === 'accepted') {
+            showToast('App installed successfully!');
+          }
+          deferredPrompt = null;
+          installBtn.classList.add('hidden');
+        }
+      };
+    }
+  });
+
+  window.addEventListener('appinstalled', () => {
+    if (installBtn) installBtn.classList.add('hidden');
+    showToast('Malabar Calculator installed as an App!');
+  });
+
   // Initial build of table DOM structure
   renderTableStructure();
 });
+
+// Register Service Worker for PWA (Installable App & Offline Mode)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then((reg) => console.log('Service Worker registered with scope:', reg.scope))
+      .catch((err) => console.warn('Service Worker registration failed:', err));
+  });
+}
